@@ -1,5 +1,8 @@
 #include "main.h"
 
+#define CURRENT_K 308
+#define CURRENT_PI 205
+
 extern float speed;
 uint8_t motorState=0;
 uint8_t changeSpeed=0;
@@ -28,6 +31,8 @@ void measureTask(void* pvParameters)
 		error[0]=getSpeed(USART1,&data.measureSpeed);
 		error[1]=getTorque(USART1,&data.measureTorque);
 		error[2]=getRegulatorTorqueRef(USART1,&data.regulatorReferenceTorque);
+		//data.regulatorReferenceTorque=data.measureTorque;
+		//error[2]=ERROR_NONE;
 		error[3]=getReferenceSpeed(USART1,&data.referenceSpeed);
 		data.timeStamp=TIM5->CNT;	
 		if(error[0]==ERROR_NONE && error[1]==ERROR_NONE && error[2]==ERROR_NONE && error[3]==ERROR_NONE)
@@ -97,33 +102,36 @@ void buttonInit(void)
 	EXTI->FTSR|=EXTI_FTSR_TR13;
 }
 
-/*void tim5Init()
+void Tim5Init()
 {
 	RCC->APB1ENR|=RCC_APB1ENR_TIM5EN;
 	TIM5->PSC=1;
 	TIM5->ARR=0xFFFFFFFF;
 	TIM5->CNT=0;
 	TIM5->CR1|=TIM_CR1_CEN;
-}   */
-
+}   
+mcpErrorCode err;
 int main()
 {
-	mcpErrorCode err;
  	RccClockInit();
-	encoderInit();
+	//encoderInit();
 	uart2Init(100000000,115200);
-	uart1Init(100000000,14400);
+	uart1Init(100000000,115200);
 	//buttonInit();
+	err=setTorquePID(CURRENT_K,CURRENT_PI,0,USART1);
+	err=setFluxPID(CURRENT_K,CURRENT_PI,0,USART1);
+	err=setSpeedPID(10,7,0,USART1);
 	err=setSpeed(1000,100,USART1);
+	err=startMotor(USART1);
 	//startMotor(USART1);
 	//commandQueue = xQueueCreate(5, sizeof(motorData_t));
 	//driveEnableSemaphore=xSemaphoreCreateBinary();
-	//xTaskCreate(measureTask,"measureTask",configMINIMAL_STACK_SIZE,NULL,configMAX_PRIORITIES-3,&measureTaskHandle);
+	xTaskCreate(measureTask,"measureTask",configMINIMAL_STACK_SIZE,NULL,configMAX_PRIORITIES-3,&measureTaskHandle);
 	//TaskSuspend(measureTaskHandle);
 	//xTaskCreate(controlTask,"controlTask",configMINIMAL_STACK_SIZE,NULL,configMAX_PRIORITIES-3,NULL);
 	//xTaskCreate(commandReciveTask,"commandReciveTask",configMINIMAL_STACK_SIZE,NULL,configMAX_PRIORITIES-2,NULL);
-	//tim5Init();
-	//vTaskStartScheduler();
+	Tim5Init();
+	vTaskStartScheduler();
 	while(1)
 	{
 		
