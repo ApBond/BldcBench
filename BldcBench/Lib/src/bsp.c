@@ -12,7 +12,7 @@ void USART1_IRQHandler(void)
 
 void USART2_IRQHandler(void)
 {
-	BaseType_t needCS = pdTRUE;
+	BaseType_t needCS = pdFALSE;
 	xSemaphoreGiveFromISR(uart2ReciveSemaphore, &needCS);
 	portYIELD_FROM_ISR(needCS)	
 }

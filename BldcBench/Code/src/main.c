@@ -2,6 +2,8 @@
 
 #define CURRENT_K 308
 #define CURRENT_PI 205
+#define SPEED_K 10
+#define SPEED_PI 7
 
 extern float speed;
 uint8_t motorState=0;
@@ -10,7 +12,7 @@ uint8_t changeSpeed=0;
 xQueueHandle commandQueue;
 TaskHandle_t measureTaskHandle;
 SemaphoreHandle_t uart2ReciveSemaphore;
-SemaphoreHandle_t driveEnableSemaphore;
+SemaphoreHandle_t buttonClickSemaphore;
 
 
 typedef struct
@@ -40,6 +42,7 @@ void measureTask(void* pvParameters)
 			uartTransmitt(11,USART2);
 			uartTransmittBuff((uint8_t*)&data,sizeof(motorData_t),USART2);
 		}
+		//vTaskDelay(100);
 	}
 }
 
@@ -47,17 +50,20 @@ void controlTask(void* pvParameters)
 {
 	while(1)
 	{
-		 if(changeSpeed==1)
+		 if(xSemaphoreTake(buttonClickSemaphore,portMAX_DELAY) == pdTRUE )
 		 {
 				if(!motorState)
 				{
-					if(startMotor(USART1)==ERROR_NONE) motorState=1;
+					//if(startMotor(USART1)==ERROR_NONE) motorState=1;
+					GPIOA->BSRR=GPIO_BSRR_BS5;
+					
 				}
 				else
 				{
-					if(stopMotor(USART1)==ERROR_NONE) motorState=0;
+					//if(stopMotor(USART1)==ERROR_NONE) motorState=0;
+					GPIOA->BSRR=GPIO_BSRR_BR5;
 				}
-				changeSpeed=0;
+				motorState=~motorState;
 		 }		
 		 //vTaskDelay(1);
 	}
@@ -72,6 +78,7 @@ void commandReciveTask(void* pvParameters)
 	{
 		if(xSemaphoreTake(uart2ReciveSemaphore,portMAX_DELAY) == pdTRUE )
 		{
+			//Прием команды по UART
 			if(uart2ReciveState==0)
 			{
 				command.command=USART2->DR;
@@ -80,6 +87,19 @@ void commandReciveTask(void* pvParameters)
 			else if(uart2ReciveState==1)
 			{
 				dataLen=USART2->DR;
+				uart2ReciveState++;
+			}
+			else
+			{
+					if(uart2ReciveState-2==dataLen)
+					{
+						
+					}
+					else
+					{
+						command.data[uart2ReciveState-2]=USART2->DR;
+						uart2ReciveState++;
+					}
 			}
 		}
 	}
@@ -89,7 +109,8 @@ void EXTI15_10_IRQHandler(void)
 {
 	BaseType_t needCS = pdFALSE;
 	EXTI->PR|=EXTI_PR_PR13;
-	changeSpeed=1;
+	xSemaphoreGiveFromISR(buttonClickSemaphore, &needCS);
+	portYIELD_FROM_ISR(needCS);
 }
 
 void buttonInit(void)
@@ -97,17 +118,20 @@ void buttonInit(void)
 	RCC->AHB1ENR|=RCC_AHB1ENR_GPIOCEN;//Тактирование порта C
 	GPIOC->PUPDR|=GPIO_PUPDR_PUPD13_0;//PC13 Pull up
 	NVIC_EnableIRQ(EXTI15_10_IRQn);//Включить прерывание
+	NVIC_SetPriority(EXTI15_10_IRQn,6);
 	SYSCFG->EXTICR[3]|=SYSCFG_EXTICR4_EXTI13_PC;
 	EXTI->IMR|=EXTI_IMR_IM13;
 	EXTI->FTSR|=EXTI_FTSR_TR13;
+	__enable_irq();
 }
 
 void Tim5Init()
 {
 	RCC->APB1ENR|=RCC_APB1ENR_TIM5EN;
-	TIM5->PSC=1;
-	TIM5->ARR=0xFFFFFFFF;
 	TIM5->CNT=0;
+	TIM5->PSC=10000-1; 
+	TIM5->EGR|=TIM_EGR_UG;//!!Генерация update event для запись предделителя!!
+	TIM5->ARR=0xFFFFFFFF;	
 	TIM5->CR1|=TIM_CR1_CEN;
 }   
 mcpErrorCode err;
@@ -117,18 +141,20 @@ int main()
 	//encoderInit();
 	uart2Init(100000000,115200);
 	uart1Init(100000000,115200);
-	//buttonInit();
+	buttonInit();
 	err=setTorquePID(CURRENT_K,CURRENT_PI,0,USART1);
 	err=setFluxPID(CURRENT_K,CURRENT_PI,0,USART1);
-	err=setSpeedPID(10,7,0,USART1);
+	err=setSpeedPID(SPEED_K,SPEED_PI,0,USART1);
 	err=setSpeed(1000,100,USART1);
-	err=startMotor(USART1);
+	RCC->AHB1ENR|=RCC_AHB1ENR_GPIOAEN;
+	GPIOA->MODER|=GPIO_MODER_MODE5_0;
+	//err=startMotor(USART1);
 	//startMotor(USART1);
 	//commandQueue = xQueueCreate(5, sizeof(motorData_t));
-	//driveEnableSemaphore=xSemaphoreCreateBinary();
+	buttonClickSemaphore=xSemaphoreCreateBinary();
 	xTaskCreate(measureTask,"measureTask",configMINIMAL_STACK_SIZE,NULL,configMAX_PRIORITIES-3,&measureTaskHandle);
 	//TaskSuspend(measureTaskHandle);
-	//xTaskCreate(controlTask,"controlTask",configMINIMAL_STACK_SIZE,NULL,configMAX_PRIORITIES-3,NULL);
+	xTaskCreate(controlTask,"controlTask",configMINIMAL_STACK_SIZE,NULL,configMAX_PRIORITIES,NULL);
 	//xTaskCreate(commandReciveTask,"commandReciveTask",configMINIMAL_STACK_SIZE,NULL,configMAX_PRIORITIES-2,NULL);
 	Tim5Init();
 	vTaskStartScheduler();

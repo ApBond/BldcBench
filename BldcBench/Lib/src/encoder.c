@@ -44,7 +44,6 @@ void tim5Init()
 	TIM5->ARR=0xFFFFFFFF;
 	TIM5->DIER|=TIM_DIER_UIE;
 	NVIC_EnableIRQ(TIM5_IRQn);
-	
 }
 
 void encoderInit(void)
