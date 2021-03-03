@@ -1,7 +1,7 @@
 Dependencies for Project 'test2', Target 'test2': (DO NOT MODIFY !)
 CompilerVersion: 5060750::V5.06 update 6 (build 750)::.\ARMCC
 F (startup_stm32f031x6.s)(0x5F85DB74)(--cpu Cortex-M0 --pd "__EVAL SETA 1" -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_test2-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include--pd "__UVISION_VERSION SETA 530" --pd "_RTE_ SETA 1" --pd "STM32F031x6 SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32f031x6.lst --xref -o test2\startup_stm32f031x6.o --depend test2\startup_stm32f031x6.d)
-F (../Src/main.c)(0x603D110B)(--c99 -c --cpu Cortex-M0 -D__EVAL -D__MICROLIB -g -O3 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/F0xx/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/UILibrary/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/SystemDriveParams -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/DSP/Include -I ..\Drivers\STM32F0xx_HAL_Driver\Inc\Legacy-I.\RTE\_test2-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F031x6 -D_RTE_ -DARM_MATH_CM0 -DUSE_HAL_DRIVER -DSTM32F031x6 -DUSE_HAL_DRIVER -DSTM32F031x6-o test2\main.o --omf_browse test2\main.crf --depend test2\main.d)
+F (../Src/main.c)(0x603FB44B)(--c99 -c --cpu Cortex-M0 -D__EVAL -D__MICROLIB -g -O3 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/F0xx/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/UILibrary/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/SystemDriveParams -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/DSP/Include -I ..\Drivers\STM32F0xx_HAL_Driver\Inc\Legacy-I.\RTE\_test2-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F031x6 -D_RTE_ -DARM_MATH_CM0 -DUSE_HAL_DRIVER -DSTM32F031x6 -DUSE_HAL_DRIVER -DSTM32F031x6-o test2\main.o --omf_browse test2\main.crf --depend test2\main.d)
 I (../Inc/main.h)(0x603CFE6F)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x5F84CED2)
 I (../Inc/stm32f0xx_hal_conf.h)(0x603CFE6F)
@@ -91,7 +91,7 @@ I (../Inc/parameters_conversion.h)(0x603CFE6B)
 I (../Inc/mc_math.h)(0x603CFE6B)
 I (../Inc/parameters_conversion_f0xx.h)(0x603CFE6C)
 I (../Inc/pmsm_motor_parameters.h)(0x603CFE6C)
-I (../Inc/drive_parameters.h)(0x603D0856)
+I (../Inc/drive_parameters.h)(0x603FA99D)
 I (../Inc/power_stage_parameters.h)(0x603CFE6C)
 I (../Inc/mc_api.h)(0x603CFE68)
 F (../Src/motorcontrol.c)(0x603CFE66)(--c99 -c --cpu Cortex-M0 -D__EVAL -D__MICROLIB -g -O3 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/F0xx/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/UILibrary/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/SystemDriveParams -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/DSP/Include -I ..\Drivers\STM32F0xx_HAL_Driver\Inc\Legacy-I.\RTE\_test2-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F031x6 -D_RTE_ -DARM_MATH_CM0 -DUSE_HAL_DRIVER -DSTM32F031x6 -DUSE_HAL_DRIVER -DSTM32F031x6-o test2\motorcontrol.o --omf_browse test2\motorcontrol.crf --depend test2\motorcontrol.d)
@@ -187,7 +187,7 @@ I (../Inc/parameters_conversion.h)(0x603CFE6B)
 I (../Inc/mc_math.h)(0x603CFE6B)
 I (../Inc/parameters_conversion_f0xx.h)(0x603CFE6C)
 I (../Inc/pmsm_motor_parameters.h)(0x603CFE6C)
-I (../Inc/drive_parameters.h)(0x603D0856)
+I (../Inc/drive_parameters.h)(0x603FA99D)
 I (../Inc/power_stage_parameters.h)(0x603CFE6C)
 I (../Inc/mc_api.h)(0x603CFE68)
 F (../Src/mc_api.c)(0x603CFE67)(--c99 -c --cpu Cortex-M0 -D__EVAL -D__MICROLIB -g -O3 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/F0xx/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/UILibrary/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/SystemDriveParams -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/DSP/Include -I ..\Drivers\STM32F0xx_HAL_Driver\Inc\Legacy-I.\RTE\_test2-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F031x6 -D_RTE_ -DARM_MATH_CM0 -DUSE_HAL_DRIVER -DSTM32F031x6 -DUSE_HAL_DRIVER -DSTM32F031x6-o test2\mc_api.o --omf_browse test2\mc_api.crf --depend test2\mc_api.d)
@@ -275,7 +275,7 @@ I (../MCSDK_v5.4.4/MotorControl/MCSDK/UILibrary/Inc/frame_communication_protocol
 I (../MCSDK_v5.4.4/MotorControl/MCSDK/UILibrary/Inc/usart_frame_communication_protocol.h)(0x5E2855FC)
 I (../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/F0xx/Inc/r3_f0xx_pwm_curr_fdbk.h)(0x5E2855FC)
 I (../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Inc/hall_speed_pos_fdbk.h)(0x5E70FBF6)
-F (../Src/motor_control_protocol.c)(0x603D0108)(--c99 -c --cpu Cortex-M0 -D__EVAL -D__MICROLIB -g -O3 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/F0xx/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/UILibrary/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/SystemDriveParams -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/DSP/Include -I ..\Drivers\STM32F0xx_HAL_Driver\Inc\Legacy-I.\RTE\_test2-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F031x6 -D_RTE_ -DARM_MATH_CM0 -DUSE_HAL_DRIVER -DSTM32F031x6 -DUSE_HAL_DRIVER -DSTM32F031x6-o test2\motor_control_protocol.o --omf_browse test2\motor_control_protocol.crf --depend test2\motor_control_protocol.d)
+F (../Src/motor_control_protocol.c)(0x603FC287)(--c99 -c --cpu Cortex-M0 -D__EVAL -D__MICROLIB -g -O3 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/F0xx/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/UILibrary/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/SystemDriveParams -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/DSP/Include -I ..\Drivers\STM32F0xx_HAL_Driver\Inc\Legacy-I.\RTE\_test2-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F031x6 -D_RTE_ -DARM_MATH_CM0 -DUSE_HAL_DRIVER -DSTM32F031x6 -DUSE_HAL_DRIVER -DSTM32F031x6-o test2\motor_control_protocol.o --omf_browse test2\motor_control_protocol.crf --depend test2\motor_control_protocol.d)
 I (../Inc/user_interface.h)(0x603D00F4)
 I (../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h)(0x5E2855FC)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E5396AC)
@@ -405,7 +405,7 @@ I (../Inc/parameters_conversion.h)(0x603CFE6B)
 I (../Inc/mc_math.h)(0x603CFE6B)
 I (../Inc/parameters_conversion_f0xx.h)(0x603CFE6C)
 I (../Inc/pmsm_motor_parameters.h)(0x603CFE6C)
-I (../Inc/drive_parameters.h)(0x603D0856)
+I (../Inc/drive_parameters.h)(0x603FA99D)
 I (../Inc/power_stage_parameters.h)(0x603CFE6C)
 I (../Inc/mc_parameters.h)(0x603CFE6C)
 I (../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/F0xx/Inc/r3_f0xx_pwm_curr_fdbk.h)(0x5E2855FC)
@@ -536,7 +536,7 @@ I (../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Inc/hall_speed_pos_fdbk.h)(0x5E7
 I (../Inc/parameters_conversion.h)(0x603CFE6B)
 I (../Inc/parameters_conversion_f0xx.h)(0x603CFE6C)
 I (../Inc/pmsm_motor_parameters.h)(0x603CFE6C)
-I (../Inc/drive_parameters.h)(0x603D0856)
+I (../Inc/drive_parameters.h)(0x603FA99D)
 I (../Inc/power_stage_parameters.h)(0x603CFE6C)
 I (../Inc/mc_api.h)(0x603CFE68)
 I (../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Inc/pwm_common.h)(0x5E2855FC)
@@ -815,7 +815,7 @@ I (../Inc/parameters_conversion.h)(0x603CFE6B)
 I (../Inc/mc_math.h)(0x603CFE6B)
 I (../Inc/parameters_conversion_f0xx.h)(0x603CFE6C)
 I (../Inc/pmsm_motor_parameters.h)(0x603CFE6C)
-I (../Inc/drive_parameters.h)(0x603D0856)
+I (../Inc/drive_parameters.h)(0x603FA99D)
 I (../Inc/power_stage_parameters.h)(0x603CFE6C)
 I (../Inc/motorcontrol.h)(0x603CFE66)
 I (../Inc/mc_api.h)(0x603CFE68)
@@ -871,7 +871,7 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_dma.h)(0x5F84CED2)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_comp.h)(0x5F84CED2)
 I (../Inc/parameters_conversion_f0xx.h)(0x603CFE6C)
 I (../Inc/pmsm_motor_parameters.h)(0x603CFE6C)
-I (../Inc/drive_parameters.h)(0x603D0856)
+I (../Inc/drive_parameters.h)(0x603FA99D)
 I (../Inc/power_stage_parameters.h)(0x603CFE6C)
 I (../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/F0xx/Inc/r3_f0xx_pwm_curr_fdbk.h)(0x5E2855FC)
 I (../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Inc/pwm_curr_fdbk.h)(0x5E2855FC)
@@ -965,7 +965,7 @@ I (../Inc/parameters_conversion.h)(0x603CFE6B)
 I (../Inc/mc_math.h)(0x603CFE6B)
 I (../Inc/parameters_conversion_f0xx.h)(0x603CFE6C)
 I (../Inc/pmsm_motor_parameters.h)(0x603CFE6C)
-I (../Inc/drive_parameters.h)(0x603D0856)
+I (../Inc/drive_parameters.h)(0x603FA99D)
 I (../Inc/power_stage_parameters.h)(0x603CFE6C)
 I (../Inc/mc_api.h)(0x603CFE68)
 F (../Src/user_interface.c)(0x603CFE6D)(--c99 -c --cpu Cortex-M0 -D__EVAL -D__MICROLIB -g -O3 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/F0xx/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/UILibrary/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/SystemDriveParams -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/DSP/Include -I ..\Drivers\STM32F0xx_HAL_Driver\Inc\Legacy-I.\RTE\_test2-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F031x6 -D_RTE_ -DARM_MATH_CM0 -DUSE_HAL_DRIVER -DSTM32F031x6 -DUSE_HAL_DRIVER -DSTM32F031x6-o test2\user_interface.o --omf_browse test2\user_interface.crf --depend test2\user_interface.d)
@@ -1122,13 +1122,13 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim.h)(0x5F84CED2)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h)(0x5F84CED2)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x5F84CED2)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x5F84CED2)
-F (..\Src\fuzzy.c)(0x603D10EF)(--c99 -c --cpu Cortex-M0 -D__EVAL -D__MICROLIB -g -O3 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/F0xx/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/UILibrary/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/SystemDriveParams -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/DSP/Include -I ..\Drivers\STM32F0xx_HAL_Driver\Inc\Legacy-I.\RTE\_test2-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F031x6 -D_RTE_ -DARM_MATH_CM0 -DUSE_HAL_DRIVER -DSTM32F031x6 -DUSE_HAL_DRIVER -DSTM32F031x6-o test2\fuzzy.o --omf_browse test2\fuzzy.crf --depend test2\fuzzy.d)
-I (../Inc/fuzzy.h)(0x603D10DF)
-I (../Inc/fuzzy_toolbox.h)(0x603D0653)
+F (..\Src\fuzzy.c)(0x603FC38D)(--c99 -c --cpu Cortex-M0 -D__EVAL -D__MICROLIB -g -O3 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/F0xx/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/UILibrary/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/SystemDriveParams -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/DSP/Include -I ..\Drivers\STM32F0xx_HAL_Driver\Inc\Legacy-I.\RTE\_test2-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F031x6 -D_RTE_ -DARM_MATH_CM0 -DUSE_HAL_DRIVER -DSTM32F031x6 -DUSE_HAL_DRIVER -DSTM32F031x6-o test2\fuzzy.o --omf_browse test2\fuzzy.crf --depend test2\fuzzy.d)
+I (../Inc/fuzzy.h)(0x603FB789)
+I (../Inc/fuzzy_toolbox.h)(0x603FA8C7)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x5E5396AA)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E5396AC)
-F (..\Src\fuzzy_toolbox.c)(0x603D0C9B)(--c99 -c --cpu Cortex-M0 -D__EVAL -D__MICROLIB -g -O3 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/F0xx/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/UILibrary/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/SystemDriveParams -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/DSP/Include -I ..\Drivers\STM32F0xx_HAL_Driver\Inc\Legacy-I.\RTE\_test2-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F031x6 -D_RTE_ -DARM_MATH_CM0 -DUSE_HAL_DRIVER -DSTM32F031x6 -DUSE_HAL_DRIVER -DSTM32F031x6-o test2\fuzzy_toolbox.o --omf_browse test2\fuzzy_toolbox.crf --depend test2\fuzzy_toolbox.d)
-I (../Inc/fuzzy_toolbox.h)(0x603D0653)
+F (..\Src\fuzzy_toolbox.c)(0x603FA8C7)(--c99 -c --cpu Cortex-M0 -D__EVAL -D__MICROLIB -g -O3 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/F0xx/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/UILibrary/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/SystemDriveParams -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/DSP/Include -I ..\Drivers\STM32F0xx_HAL_Driver\Inc\Legacy-I.\RTE\_test2-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F031x6 -D_RTE_ -DARM_MATH_CM0 -DUSE_HAL_DRIVER -DSTM32F031x6 -DUSE_HAL_DRIVER -DSTM32F031x6-o test2\fuzzy_toolbox.o --omf_browse test2\fuzzy_toolbox.crf --depend test2\fuzzy_toolbox.d)
+I (../Inc/fuzzy_toolbox.h)(0x603FA8C7)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x5E5396AA)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E5396AC)
 F (../Src/system_stm32f0xx.c)(0x5F84CEBC)(--c99 -c --cpu Cortex-M0 -D__EVAL -D__MICROLIB -g -O3 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/F0xx/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/UILibrary/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/SystemDriveParams -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/DSP/Include -I ..\Drivers\STM32F0xx_HAL_Driver\Inc\Legacy-I.\RTE\_test2-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F031x6 -D_RTE_ -DARM_MATH_CM0 -DUSE_HAL_DRIVER -DSTM32F031x6 -DUSE_HAL_DRIVER -DSTM32F031x6-o test2\system_stm32f0xx.o --omf_browse test2\system_stm32f0xx.crf --depend test2\system_stm32f0xx.d)
@@ -1837,7 +1837,7 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_usart.h)(0x5F84CED2)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_dac.h)(0x5F84CED2)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_dma.h)(0x5F84CED2)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_comp.h)(0x5F84CED2)
-F (../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Src/speed_torq_ctrl.c)(0x603D0F7D)(--c99 -c --cpu Cortex-M0 -D__EVAL -D__MICROLIB -g -O3 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/F0xx/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/UILibrary/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/SystemDriveParams -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/DSP/Include -I ..\Drivers\STM32F0xx_HAL_Driver\Inc\Legacy-I.\RTE\_test2-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F031x6 -D_RTE_ -DARM_MATH_CM0 -DUSE_HAL_DRIVER -DSTM32F031x6 -DUSE_HAL_DRIVER -DSTM32F031x6-o test2\speed_torq_ctrl.o --omf_browse test2\speed_torq_ctrl.crf --depend test2\speed_torq_ctrl.d)
+F (../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Src/speed_torq_ctrl.c)(0x603FC25D)(--c99 -c --cpu Cortex-M0 -D__EVAL -D__MICROLIB -g -O3 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/F0xx/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/UILibrary/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/SystemDriveParams -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/DSP/Include -I ..\Drivers\STM32F0xx_HAL_Driver\Inc\Legacy-I.\RTE\_test2-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F031x6 -D_RTE_ -DARM_MATH_CM0 -DUSE_HAL_DRIVER -DSTM32F031x6 -DUSE_HAL_DRIVER -DSTM32F031x6-o test2\speed_torq_ctrl.o --omf_browse test2\speed_torq_ctrl.crf --depend test2\speed_torq_ctrl.d)
 I (../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Inc/speed_torq_ctrl.h)(0x5E2855FC)
 I (../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h)(0x5E2855FC)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E5396AC)
@@ -1886,8 +1886,8 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_dma.h)(0x5F84CED2)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_comp.h)(0x5F84CED2)
 I (../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Inc/pid_regulator.h)(0x5E2855FC)
 I (../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Inc/speed_pos_fdbk.h)(0x5E2855FC)
-I (../Inc/fuzzy.h)(0x603D10DF)
-I (../Inc/fuzzy_toolbox.h)(0x603D0653)
+I (../Inc/fuzzy.h)(0x603FB789)
+I (../Inc/fuzzy_toolbox.h)(0x603FA8C7)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x5E5396AA)
 F (../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Src/state_machine.c)(0x5E2855FC)(--c99 -c --cpu Cortex-M0 -D__EVAL -D__MICROLIB -g -O3 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/F0xx/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/UILibrary/Inc -I ../MCSDK_v5.4.4/MotorControl/MCSDK/SystemDriveParams -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/DSP/Include -I ..\Drivers\STM32F0xx_HAL_Driver\Inc\Legacy-I.\RTE\_test2-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F031x6 -D_RTE_ -DARM_MATH_CM0 -DUSE_HAL_DRIVER -DSTM32F031x6 -DUSE_HAL_DRIVER -DSTM32F031x6-o test2\state_machine.o --omf_browse test2\state_machine.crf --depend test2\state_machine.d)
 I (../MCSDK_v5.4.4/MotorControl/MCSDK/MCLib/Any/Inc/state_machine.h)(0x5E2855FC)

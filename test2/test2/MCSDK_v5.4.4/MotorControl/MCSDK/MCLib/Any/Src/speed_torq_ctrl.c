@@ -303,6 +303,7 @@ __weak void STC_StopRamp( SpeednTorqCtrl_Handle_t * pHandle )
   */
 int16_t tempSpeed,tempMesSpeed,tempTorque;
 int32_t mySpeed=100;
+int16_t der;
 
 __weak int16_t STC_CalcTorqueReference( SpeednTorqCtrl_Handle_t * pHandle )
 {
@@ -311,7 +312,7 @@ __weak int16_t STC_CalcTorqueReference( SpeednTorqCtrl_Handle_t * pHandle )
   int16_t hMeasuredSpeed;
   int16_t hTargetSpeed;
   int16_t hError;
-	int16_t der;
+	
 	int16_t er;
 	static int16_t hErrorPrev=0;
   if ( pHandle->Mode == STC_TORQUE_MODE )
@@ -362,7 +363,7 @@ __weak int16_t STC_CalcTorqueReference( SpeednTorqCtrl_Handle_t * pHandle )
 		derivMoment =  fuzzyController(er, der);
     hTorqueReference += derivMoment;
 		//hTorqueReference=PID_Controller(pHandle->PISpeed, hError);
-	
+		if(hTorqueReference>11500) hTorqueReference=11500;
 		
 		
 		tempSpeed=hTargetSpeed;

@@ -15,9 +15,9 @@
 
 typedef enum
 {
-	START=0,
-	STOP=1,
-	CHANGE_SPEED=2
+	START=1,
+	STOP=2,
+	CHANGE_SPEED=3
 }commandCode_t;
 
 typedef struct

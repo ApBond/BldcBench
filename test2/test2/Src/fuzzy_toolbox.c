@@ -2,7 +2,7 @@
 /*???????? ?????????? ???????*/
 
 int16_t limitedSum(int16_t A, int16_t B) {
-	return fuzzyAnd(1, A + B);
+	return fuzzyAnd(MU_MAX, A + B);
 }
 
 int16_t fuzzyOr(int16_t A, int16_t B) {
@@ -17,7 +17,7 @@ int16_t fuzzyAnd(int16_t A, int16_t B) {
 
 int16_t fuzzyNot(int16_t A) {
 	int16_t mu;
-	mu = 1 - A;
+	mu = MU_MAX - A;
 	return mu;
 }
 
@@ -64,7 +64,7 @@ int16_t triangle(int16_t min, int16_t max, int16_t pic, int16_t A) {
 }
 int16_t ball(int16_t min, int16_t max, int16_t A) {
 	int16_t mu = 0;
-	int16_t m = mean(min, max); 
+	int16_t m = mean(min, max);
 	if (A > max || A < min) mu = 0;
 	else mu = -((A - m) * (A - m)) * MU_MAX / (max - m) / (max - m) + 1;
 	return mu;
@@ -164,10 +164,10 @@ int16_t defuzzifier(term termB, int16_t muB) {
 
 /*??????? ????????? ??????????? ??????*/
 /*???????->????????*/
-int16_t Mamdany_Singlton(rull *rulls, term *termB, char lenRulls) {
+int16_t Mamdany_Singlton(rull *rulls, term *termB, int8_t lenRulls) {
 	int16_t outB = 0;
 	int16_t B = 0;
-	char i;
+	int8_t i;
 	int16_t sumMu = 0;
 
 	for (i = 0; i < lenRulls; i++) {

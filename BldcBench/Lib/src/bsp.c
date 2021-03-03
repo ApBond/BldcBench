@@ -1,8 +1,10 @@
 #include "bsp.h"
+#include "main.h"
 
 uint8_t frameBuff[MAX_PAYLOAD_LENGTH+2];
 uint8_t reciveStatus=0;
 extern SemaphoreHandle_t uart2ReciveSemaphore;
+extern xQueueHandle commandQueue;
 
 void USART1_IRQHandler(void)
 {
@@ -12,9 +14,43 @@ void USART1_IRQHandler(void)
 
 void USART2_IRQHandler(void)
 {
-	BaseType_t needCS = pdFALSE;
+	/*BaseType_t needCS = pdFALSE;
 	xSemaphoreGiveFromISR(uart2ReciveSemaphore, &needCS);
-	portYIELD_FROM_ISR(needCS)	
+	portYIELD_FROM_ISR(needCS)*/
+	BaseType_t needCS = pdFALSE;
+	static uint8_t uart2ReciveState=0;
+	controlCommand_t command;
+	uint8_t dataLen=0;
+	if(uart2ReciveState==0)
+	{
+		command.command=USART2->DR;
+		uart2ReciveState++;
+	}
+	else if(uart2ReciveState==1)
+	{
+		dataLen=USART2->DR;
+		if(dataLen==0)
+		{
+			uart2ReciveState=0;
+			//xQueueSendToBackFromISR(commandQueue,(const void*)&command,&needCS);
+			//portYIELD_FROM_ISR(needCS);
+		}
+		uart2ReciveState++;
+	}
+	else
+	{
+		/*if(uart2ReciveState-2==dataLen)
+		{
+			uart2ReciveState=0;
+			dataLen=0;
+			xQueueSendToBack(commandQueue,(const void*)&command,1000);
+		}
+		else
+		{
+			command.data[uart2ReciveState-2]=USART2->DR;
+			uart2ReciveState++;
+		}*/
+	}
 }
 
 void Tim9Init(void)//Таймер 9 используется для ожидания при чтении по UART
@@ -41,6 +77,8 @@ void uart2Init(uint32_t coreFreq, uint32_t baudRate)
 	USART2->BRR|=coreFreq/(2*baudRate);//Скорость работы uart
 	//USART2->CR1|=USART_CR1_RXNEIE;//Разрешить прерывание по приёму
 	//NVIC_EnableIRQ(USART2_IRQn);
+	//NVIC_SetPriority(USART2_IRQn,2);
+	//__enable_irq();
 	USART2->CR1|=USART_CR1_UE;//Включить uart
 }
 

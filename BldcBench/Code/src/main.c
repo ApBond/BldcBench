@@ -30,42 +30,64 @@ void measureTask(void* pvParameters)
 	mcpErrorCode error[4];
 	while(1)
 	{
-		error[0]=getSpeed(USART1,&data.measureSpeed);
-		error[1]=getTorque(USART1,&data.measureTorque);
-		error[2]=getRegulatorTorqueRef(USART1,&data.regulatorReferenceTorque);
-		//data.regulatorReferenceTorque=data.measureTorque;
-		//error[2]=ERROR_NONE;
-		error[3]=getReferenceSpeed(USART1,&data.referenceSpeed);
-		data.timeStamp=TIM5->CNT;	
+		taskENTER_CRITICAL(); 
+		{
+			error[0]=getSpeed(USART1,&data.measureSpeed);
+			error[1]=getTorque(USART1,&data.measureTorque);
+			error[2]=getRegulatorTorqueRef(USART1,&data.regulatorReferenceTorque);
+			//data.regulatorReferenceTorque=data.measureTorque;
+			//error[2]=ERROR_NONE;
+			error[3]=getReferenceSpeed(USART1,&data.referenceSpeed);
+			data.timeStamp=TIM5->CNT;
+		}			
+		taskEXIT_CRITICAL(); 
 		if(error[0]==ERROR_NONE && error[1]==ERROR_NONE && error[2]==ERROR_NONE && error[3]==ERROR_NONE)
 		{
 			uartTransmitt(11,USART2);
 			uartTransmittBuff((uint8_t*)&data,sizeof(motorData_t),USART2);
 		}
-		//vTaskDelay(100);
 	}
 }
 
 void controlTask(void* pvParameters)
 {
+	controlCommand_t command;
+	mcpErrorCode error=ERROR_NONE;
 	while(1)
 	{
-		 if(xSemaphoreTake(buttonClickSemaphore,portMAX_DELAY) == pdTRUE )
+		if(xSemaphoreTake(buttonClickSemaphore,portMAX_DELAY)==pdTRUE)
+		{
+			error=ERROR_NONE;
+			if(!motorState)
+			{
+				GPIOA->BSRR=GPIO_BSRR_BS5;
+				error=startMotor(USART1);
+				TIM5->CNT=0;
+				vTaskResume(measureTaskHandle);
+			}
+			else
+			{
+				GPIOA->BSRR=GPIO_BSRR_BR5;
+				vTaskSuspend(measureTaskHandle);
+				error=stopMotor(USART1);	
+			}
+			if(error==ERROR_NONE) motorState=~motorState;
+		}
+		 /*if(xQueueReceive(commandQueue,&command,portMAX_DELAY) == pdTRUE )
 		 {
-				if(!motorState)
-				{
-					//if(startMotor(USART1)==ERROR_NONE) motorState=1;
-					GPIOA->BSRR=GPIO_BSRR_BS5;
-					
-				}
-				else
-				{
-					//if(stopMotor(USART1)==ERROR_NONE) motorState=0;
-					GPIOA->BSRR=GPIO_BSRR_BR5;
-				}
-				motorState=~motorState;
-		 }		
-		 //vTaskDelay(1);
+			 switch(command.command)
+			 {
+				 case START:
+					 GPIOA->BSRR=GPIO_BSRR_BS5;
+					 startMotor(USART1);
+					 break;
+				 case STOP:
+					 stopMotor(USART1);
+					 break;
+				 case CHANGE_SPEED:
+					 break;
+			 }
+		 }*/		
 	}
 }
 
@@ -93,7 +115,9 @@ void commandReciveTask(void* pvParameters)
 			{
 					if(uart2ReciveState-2==dataLen)
 					{
-						
+						uart2ReciveState=0;
+						dataLen=0;
+						xQueueSendToBack(commandQueue,(const void*)&command,1000);
 					}
 					else
 					{
@@ -140,7 +164,7 @@ int main()
  	RccClockInit();
 	//encoderInit();
 	uart2Init(100000000,115200);
-	uart1Init(100000000,115200);
+	uart1Init(100000000,14400);
 	buttonInit();
 	err=setTorquePID(CURRENT_K,CURRENT_PI,0,USART1);
 	err=setFluxPID(CURRENT_K,CURRENT_PI,0,USART1);
@@ -150,12 +174,13 @@ int main()
 	GPIOA->MODER|=GPIO_MODER_MODE5_0;
 	//err=startMotor(USART1);
 	//startMotor(USART1);
-	//commandQueue = xQueueCreate(5, sizeof(motorData_t));
+	commandQueue = xQueueCreate(5, sizeof(controlCommand_t));
 	buttonClickSemaphore=xSemaphoreCreateBinary();
+	uart2ReciveSemaphore=xSemaphoreCreateBinary();
 	xTaskCreate(measureTask,"measureTask",configMINIMAL_STACK_SIZE,NULL,configMAX_PRIORITIES-3,&measureTaskHandle);
-	//TaskSuspend(measureTaskHandle);
-	xTaskCreate(controlTask,"controlTask",configMINIMAL_STACK_SIZE,NULL,configMAX_PRIORITIES,NULL);
-	//xTaskCreate(commandReciveTask,"commandReciveTask",configMINIMAL_STACK_SIZE,NULL,configMAX_PRIORITIES-2,NULL);
+	vTaskSuspend(measureTaskHandle);
+	xTaskCreate(controlTask,"controlTask",configMINIMAL_STACK_SIZE,NULL,configMAX_PRIORITIES-1,NULL);
+	//xTaskCreate(commandReciveTask,"commandReciveTask",configMINIMAL_STACK_SIZE,NULL,configMAX_PRIORITIES-1,NULL);
 	Tim5Init();
 	vTaskStartScheduler();
 	while(1)
