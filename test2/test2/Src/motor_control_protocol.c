@@ -294,7 +294,7 @@ __weak void MCP_ReceivedFrame(MCP_Handle_t *pHandle, uint8_t Code, uint8_t *buff
       switch (bRegID)
       {
 			case MC_PROTICOL_REF_TORQUE_CNTR_REF:
-				pHandle->fFcpSend(pHandle->pFCP,ACK_NOERROR,(uint8_t*)(&der),2);
+				pHandle->fFcpSend(pHandle->pFCP,ACK_NOERROR,(uint8_t*)(&tempTorque),2);
 			break;
       case MC_PROTOCOL_REG_TARGET_MOTOR:
       case MC_PROTOCOL_REG_STATUS:

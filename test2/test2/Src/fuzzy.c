@@ -28,52 +28,52 @@ int16_t fuzzyController(int16_t er, int16_t der) {
 	int8_t i = 0;
 
 	/*???????? ??????????????? ??????????*//*??????????? ??????*/
-	er_var[OB].min = -450;
-	er_var[OB].max = -300;
+	er_var[OB].min = -200;
+	er_var[OB].max = -100;
 	er_var[OB].shape = TYPE_Z;
 
-	er_var[OC].min = -450;
-	er_var[OC].max = -150;
-	er_var[OC].pic = -300;
+	er_var[OC].min = -100;
+	er_var[OC].max = -3;
+	er_var[OC].pic = -20;
 	er_var[OC].shape = TRIANGLE;
 
-	er_var[OM].min = -300;
-	er_var[OM].max = -5;
-	er_var[OM].pic = -150;
+	er_var[OM].min = -20;
+	er_var[OM].max = -0;
+	er_var[OM].pic = -3;
 	er_var[OM].shape = TRIANGLE;
 
-	er_var[H].min = -5;
-	er_var[H].max = 5;
+	er_var[H].min = -3;
+	er_var[H].max = 3;
 	er_var[H].pic = 0;
 	er_var[H].shape = TRIANGLE;
 
-	er_var[PM].min = 5;
-	er_var[PM].max = 300;
-	er_var[PM].pic = 150;
+	er_var[PM].min = 0;
+	er_var[PM].max = 20;
+	er_var[PM].pic = 3;
 	er_var[PM].shape = TRIANGLE;
 
-	er_var[PC].min = 150;
-	er_var[PC].max = 450;
-	er_var[PC].pic = 300;
+	er_var[PC].min = 3;
+	er_var[PC].max = 100;
+	er_var[PC].pic = 20;
 	er_var[PC].shape = TRIANGLE;
 
-	er_var[PB].min = 300;
-	er_var[PB].max = 450;
+	er_var[PB].min = 100;
+	er_var[PB].max = 200;
 	er_var[PB].shape = TYPE_S;
 
 
 	der_var[OB].min = -10;
-	der_var[OB].max = -7;
+	der_var[OB].max = -3;
 	der_var[OB].shape = TYPE_Z;
 
 	der_var[OC].min = -10;
-	der_var[OC].max = -4;
-	der_var[OC].pic = -7;
+	der_var[OC].max = -1;
+	der_var[OC].pic = -3;
 	der_var[OC].shape = TRIANGLE;
 
-	der_var[OM].min = -7;
-	der_var[OM].max = -1;
-	der_var[OM].pic = -4;
+	der_var[OM].min = -3;
+	der_var[OM].max = 0;
+	der_var[OM].pic = -1;
 	der_var[OM].shape = TRIANGLE;
 
 	der_var[H].min = -1;
@@ -81,34 +81,34 @@ int16_t fuzzyController(int16_t er, int16_t der) {
 	der_var[H].pic = 0;
 	der_var[H].shape = TRIANGLE;
 
-	der_var[PM].min = 1;
-	der_var[PM].max = 7;
-	der_var[PM].pic = 4;
+	der_var[PM].min = 0;
+	der_var[PM].max = 3;
+	der_var[PM].pic = 1;
 	der_var[PM].shape = TRIANGLE;
 
-	der_var[PC].min = 4;
+	der_var[PC].min = 1;
 	der_var[PC].max = 10;
-	der_var[PC].pic = 7;
+	der_var[PC].pic = 3;
 	der_var[PC].shape = TRIANGLE;
 
-	der_var[PB].min = 7;
+	der_var[PB].min = 3;
 	der_var[PB].max = 10;
 	der_var[PB].shape = TYPE_S;
 
 
 
-	moment_var[OB].min = -60;
-	moment_var[OB].max = -30;
+	moment_var[OB].min = -5;
+	moment_var[OB].max = -3;
 	moment_var[OB].shape = TYPE_Z;
 
-	moment_var[OC].min = -60;
-	moment_var[OC].max = -3;
-	moment_var[OC].pic = -30;
+	moment_var[OC].min = -5;
+	moment_var[OC].max = -1;
+	moment_var[OC].pic = -3;
 	moment_var[OC].shape = TRIANGLE;
 
-	moment_var[OM].min = -6;
-	moment_var[OM].max = -1;
-	moment_var[OM].pic = -3;
+	moment_var[OM].min = -3;
+	moment_var[OM].max = 0;
+	moment_var[OM].pic = -1;
 	moment_var[OM].shape = TRIANGLE;
 
 	moment_var[H].min = -1;
@@ -116,18 +116,18 @@ int16_t fuzzyController(int16_t er, int16_t der) {
 	moment_var[H].pic = 0;
 	moment_var[H].shape = TRIANGLE;
 
-	moment_var[PM].min = 1;
-	moment_var[PM].max = 6;
-	moment_var[PM].pic = 3;
+	moment_var[PM].min = 0;
+	moment_var[PM].max = 3;
+	moment_var[PM].pic = 1;
 	moment_var[PM].shape = TRIANGLE;
 
-	moment_var[PC].min = 3;
-	moment_var[PC].max = 60;
-	moment_var[PC].pic = 30;
+	moment_var[PC].min = 1;
+	moment_var[PC].max = 5;
+	moment_var[PC].pic = 3;
 	moment_var[PC].shape = TRIANGLE;
 
-	moment_var[PB].min = 30;
-	moment_var[PB].max = 60;
+	moment_var[PB].min = 3;
+	moment_var[PB].max = 5;
 	moment_var[PB].shape = TYPE_S;
 
 	/*???????????*/
