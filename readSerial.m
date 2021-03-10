@@ -10,7 +10,7 @@ while 1
         break;
     end
 end
-while (length(speed)~=200)
+while (length(speed)~=700)
     speed=[speed fread(com,[2 1],'int32')];
     torque=[torque fread(com,[2 1],'int16')];
     time=[time fread(com,1,'uint32')];
@@ -19,15 +19,21 @@ end
 
 fclose(com);
 time=(time-time(1))/100000;
-subplot(2,2,1)
-plot(time,speed(1,:))
-title("Reference speed")
-subplot(2,2,2)
+% subplot(2,2,1)
+% plot(time,speed(1,:))
+% title("Reference speed")
+% subplot(2,2,2)
+% plot(time,speed(2,:))
+% title("Measure speed")
+% subplot(2,2,3)
+% plot(time,torque(1,:))
+% title("Regulator torque")
+% subplot(2,2,4)
+% plot(time,torque(2,:))
+% title("Measure torque")
+figure
+grid on
 plot(time,speed(2,:))
 title("Measure speed")
-subplot(2,2,3)
-plot(time,torque(1,:))
-title("Regulator torque")
-subplot(2,2,4)
-plot(time,torque(2,:))
-title("Measure torque")
+saveSpeed=speed(2,:);
+save('speed2000.mat','saveSpeed','time');

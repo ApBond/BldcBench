@@ -1,0 +1,4 @@
+clc,clear,close
+fi
+load('fig1.mat');
+plot(time,saveSpeed);

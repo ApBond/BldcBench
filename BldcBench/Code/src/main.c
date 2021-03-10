@@ -8,6 +8,10 @@
 #define SPEED_D 100
 #define APPLICATION_SPEED 1000
 
+#define STEP_MAX 2000
+#define STEP_MIN 0
+#define STEP_T 2000 
+
 extern float speed;
 uint8_t motorState=0;
 uint8_t changeSpeed=0;
@@ -33,8 +37,12 @@ void speedCntrTask(void* pvParameters)
 	mcpErrorCode err;
 	while(1)
 	{
-		err=setSpeed((uint32_t)(APPLICATION_SPEED+APPLICATION_SPEED*sinf((float)(TIM5->CNT)/(float)(10000))),1,USART1);
-		vTaskDelay(1);
+		//err=setSpeed((uint32_t)(APPLICATION_SPEED+APPLICATION_SPEED*sinf((float)(TIM5->CNT)/(float)(10000))),1,USART1);
+		//vTaskDelay(1);
+		setSpeed(STEP_MAX,1,USART1);
+		vTaskDelay(STEP_T/2);
+		setSpeed(STEP_MIN,1,USART1);
+		vTaskDelay(STEP_T/2);
 	}
 
 }
@@ -75,17 +83,20 @@ void controlTask(void* pvParameters)
 			if(!motorState)
 			{
 				GPIOA->BSRR=GPIO_BSRR_BS5;
-				error=startMotor(USART1);
+				setSpeed(0,1,USART1);
+				error=startMotor(USART1);	
 				TIM5->CNT=0;
+				TIM5->CR1|=TIM_CR1_CEN;
+				xTaskCreate(speedCntrTask,"speedCntrTask",configMINIMAL_STACK_SIZE,NULL,configMAX_PRIORITIES-2,&speedCntrTaskHandle);
 				vTaskResume(measureTaskHandle);
-				vTaskResume(speedCntrTaskHandle);
 			}
 			else
 			{
 				GPIOA->BSRR=GPIO_BSRR_BR5;
-				vTaskSuspend(measureTaskHandle);
-				vTaskSuspend(speedCntrTaskHandle);
+				vTaskDelete(speedCntrTaskHandle);
+				vTaskSuspend(measureTaskHandle);				
 				error=stopMotor(USART1);	
+				TIM5->CR1&=~TIM_CR1_CEN;
 			}
 			if(error==ERROR_NONE) motorState=~motorState;
 		}
@@ -185,16 +196,16 @@ int main()
 	err=setTorquePID(CURRENT_K,CURRENT_PI,0,USART1);
 	err=setFluxPID(CURRENT_K,CURRENT_PI,0,USART1);
 	err=setSpeedPID(SPEED_K,SPEED_PI,SPEED_D,USART1);
-	err=setSpeed(APPLICATION_SPEED,1,USART1);
+	//err=setSpeed(APPLICATION_SPEED,1,USART1);
 	RCC->AHB1ENR|=RCC_AHB1ENR_GPIOAEN;
 	GPIOA->MODER|=GPIO_MODER_MODE5_0;
 	commandQueue = xQueueCreate(5, sizeof(controlCommand_t));
 	buttonClickSemaphore=xSemaphoreCreateBinary();
 	uart2ReciveSemaphore=xSemaphoreCreateBinary();
 	xTaskCreate(measureTask,"measureTask",configMINIMAL_STACK_SIZE,NULL,configMAX_PRIORITIES-3,&measureTaskHandle);
-	xTaskCreate(speedCntrTask,"speedCntrTask",configMINIMAL_STACK_SIZE,NULL,configMAX_PRIORITIES-2,&speedCntrTaskHandle);
+	//xTaskCreate(speedCntrTask,"speedCntrTask",configMINIMAL_STACK_SIZE,NULL,configMAX_PRIORITIES-2,&speedCntrTaskHandle);
 	vTaskSuspend(measureTaskHandle);
-	vTaskSuspend(speedCntrTaskHandle);
+	//vTaskSuspend(speedCntrTaskHandle);
 	xTaskCreate(controlTask,"controlTask",configMINIMAL_STACK_SIZE,NULL,configMAX_PRIORITIES-1,NULL);
 	
 	//xTaskCreate(commandReciveTask,"commandReciveTask",configMINIMAL_STACK_SIZE,NULL,configMAX_PRIORITIES-1,NULL);

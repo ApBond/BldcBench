@@ -362,9 +362,8 @@ __weak int16_t STC_CalcTorqueReference( SpeednTorqCtrl_Handle_t * pHandle )
 		hErrorPrev=hError;
 		derivMoment =  fuzzyController(er, der);
     hTorqueReference += derivMoment;
-		//hTorqueReference=PID_Controller(pHandle->PISpeed, hError);
 		if(hTorqueReference>11500) hTorqueReference=11500;
-		
+		//hTorqueReference=PID_Controller(pHandle->PISpeed, hError);
 		
 		tempSpeed=hTargetSpeed;
 		tempMesSpeed=hMeasuredSpeed;
