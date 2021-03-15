@@ -28,37 +28,37 @@ int16_t fuzzyController(int16_t er, int16_t der) {
 	int8_t i = 0;
 
 	/*???????? ??????????????? ??????????*//*??????????? ??????*/
-	er_var[OB].min = -200;
-	er_var[OB].max = -100;
+	er_var[OB].min = -60;
+	er_var[OB].max = -20;
 	er_var[OB].shape = TYPE_Z;
 
-	er_var[OC].min = -100;
-	er_var[OC].max = -3;
+	er_var[OC].min = -60;
+	er_var[OC].max = -6;
 	er_var[OC].pic = -20;
 	er_var[OC].shape = TRIANGLE;
 
 	er_var[OM].min = -20;
 	er_var[OM].max = -0;
-	er_var[OM].pic = -3;
+	er_var[OM].pic = -6;
 	er_var[OM].shape = TRIANGLE;
 
-	er_var[H].min = -3;
-	er_var[H].max = 3;
+	er_var[H].min = -6;
+	er_var[H].max = 6;
 	er_var[H].pic = 0;
 	er_var[H].shape = TRIANGLE;
 
 	er_var[PM].min = 0;
 	er_var[PM].max = 20;
-	er_var[PM].pic = 3;
+	er_var[PM].pic = 6;
 	er_var[PM].shape = TRIANGLE;
 
-	er_var[PC].min = 3;
-	er_var[PC].max = 100;
+	er_var[PC].min = 6;
+	er_var[PC].max = 60;
 	er_var[PC].pic = 20;
 	er_var[PC].shape = TRIANGLE;
 
-	er_var[PB].min = 100;
-	er_var[PB].max = 200;
+	er_var[PB].min = 20;
+	er_var[PB].max = 60;
 	er_var[PB].shape = TYPE_S;
 
 
