@@ -97,11 +97,11 @@ int16_t fuzzyController(int16_t er, int16_t der) {
 
 
 
-	moment_var[OB].min = -5;
+	moment_var[OB].min = -10;
 	moment_var[OB].max = -3;
 	moment_var[OB].shape = TYPE_Z;
 
-	moment_var[OC].min = -5;
+	moment_var[OC].min = -10;
 	moment_var[OC].max = -1;
 	moment_var[OC].pic = -3;
 	moment_var[OC].shape = TRIANGLE;
@@ -122,12 +122,12 @@ int16_t fuzzyController(int16_t er, int16_t der) {
 	moment_var[PM].shape = TRIANGLE;
 
 	moment_var[PC].min = 1;
-	moment_var[PC].max = 5;
+	moment_var[PC].max = 10;
 	moment_var[PC].pic = 3;
 	moment_var[PC].shape = TRIANGLE;
 
 	moment_var[PB].min = 3;
-	moment_var[PB].max = 5;
+	moment_var[PB].max = 10;
 	moment_var[PB].shape = TYPE_S;
 
 	/*???????????*/
