@@ -9,16 +9,16 @@
  *           * read and write gain functions
  *
  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
-  *
+ * @attention
+ *
+ * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+ * All rights reserved.</center></h2>
+ *
+ * This software component is licensed by ST under Ultimate Liberty license
+ * SLA0044, the "License"; You may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at:
+ *                             www.st.com/SLA0044
+ *
  ******************************************************************************
  */
 
@@ -65,13 +65,12 @@
  * @param  pHandle: handler of the current instance of the PID component
  * @retval None
  */
-__weak void PID_HandleInit( PID_Handle_t * pHandle )
-{
-  pHandle->hKpGain =  pHandle->hDefKpGain;
-  pHandle->hKiGain =  pHandle->hDefKiGain;
-  pHandle->hKdGain =  pHandle->hDefKdGain;
-  pHandle->wIntegralTerm = 0x00000000UL;
-  pHandle->wPrevProcessVarError = 0x00000000UL;
+__weak void PID_HandleInit(PID_Handle_t * pHandle) {
+	pHandle->hKpGain = pHandle->hDefKpGain;
+	pHandle->hKiGain = pHandle->hDefKiGain;
+	pHandle->hKdGain = pHandle->hDefKdGain;
+	pHandle->wIntegralTerm = 0x00000000UL;
+	pHandle->wPrevProcessVarError = 0x00000000UL;
 }
 
 /**
@@ -80,9 +79,8 @@ __weak void PID_HandleInit( PID_Handle_t * pHandle )
  * @param  hKpGain: new Kp gain
  * @retval None
  */
-__weak void PID_SetKP( PID_Handle_t * pHandle, int16_t hKpGain )
-{
-  pHandle->hKpGain = hKpGain;
+__weak void PID_SetKP(PID_Handle_t * pHandle, int16_t hKpGain) {
+	pHandle->hKpGain = hKpGain;
 }
 
 /**
@@ -91,9 +89,8 @@ __weak void PID_SetKP( PID_Handle_t * pHandle, int16_t hKpGain )
  * @param  hKiGain: new Ki gain
  * @retval None
  */
-__weak void PID_SetKI( PID_Handle_t * pHandle, int16_t hKiGain )
-{
-  pHandle->hKiGain = hKiGain;
+__weak void PID_SetKI(PID_Handle_t * pHandle, int16_t hKiGain) {
+	pHandle->hKiGain = hKiGain;
 }
 
 /**
@@ -101,9 +98,8 @@ __weak void PID_SetKI( PID_Handle_t * pHandle, int16_t hKiGain )
  * @param  pHandle: handler of the current instance of the PID component
  * @retval Kp gain
  */
-__weak int16_t PID_GetKP( PID_Handle_t * pHandle )
-{
-  return ( pHandle->hKpGain );
+__weak int16_t PID_GetKP(PID_Handle_t * pHandle) {
+	return (pHandle->hKpGain);
 }
 
 /**
@@ -111,9 +107,8 @@ __weak int16_t PID_GetKP( PID_Handle_t * pHandle )
  * @param  pHandle: handler of the current instance of the PID component
  * @retval Ki gain
  */
-__weak int16_t PID_GetKI( PID_Handle_t * pHandle )
-{
-  return ( pHandle->hKiGain );
+__weak int16_t PID_GetKI(PID_Handle_t * pHandle) {
+	return (pHandle->hKiGain);
 }
 
 /**
@@ -121,9 +116,8 @@ __weak int16_t PID_GetKI( PID_Handle_t * pHandle )
  * @param  pHandle: handler of the current instance of the PID component
  * @retval default Kp gain
  */
-__weak int16_t PID_GetDefaultKP( PID_Handle_t * pHandle )
-{
-  return ( pHandle->hDefKpGain );
+__weak int16_t PID_GetDefaultKP(PID_Handle_t * pHandle) {
+	return (pHandle->hDefKpGain);
 }
 
 /**
@@ -131,9 +125,8 @@ __weak int16_t PID_GetDefaultKP( PID_Handle_t * pHandle )
  * @param  pHandle: handler of the current instance of the PID component
  * @retval default Ki gain
  */
-__weak int16_t PID_GetDefaultKI( PID_Handle_t * pHandle )
-{
-  return ( pHandle->hDefKiGain );
+__weak int16_t PID_GetDefaultKI(PID_Handle_t * pHandle) {
+	return (pHandle->hDefKiGain);
 }
 
 /**
@@ -142,11 +135,11 @@ __weak int16_t PID_GetDefaultKI( PID_Handle_t * pHandle )
  * @param  wIntegralTermValue: new integral term value
  * @retval None
  */
-__weak void PID_SetIntegralTerm( PID_Handle_t * pHandle, int32_t wIntegralTermValue )
-{
-  pHandle->wIntegralTerm = wIntegralTermValue;
+__weak void PID_SetIntegralTerm(PID_Handle_t * pHandle,
+		int32_t wIntegralTermValue) {
+	pHandle->wIntegralTerm = wIntegralTermValue;
 
-  return;
+	return;
 }
 
 /**
@@ -154,9 +147,8 @@ __weak void PID_SetIntegralTerm( PID_Handle_t * pHandle, int32_t wIntegralTermVa
  * @param  pHandle: handler of the current instance of the PID component
  * @retval Kp gain divisor
  */
-__weak uint16_t PID_GetKPDivisor( PID_Handle_t * pHandle )
-{
-  return ( pHandle->hKpDivisor );
+__weak uint16_t PID_GetKPDivisor(PID_Handle_t * pHandle) {
+	return (pHandle->hKpDivisor);
 }
 
 /**
@@ -165,10 +157,10 @@ __weak uint16_t PID_GetKPDivisor( PID_Handle_t * pHandle )
  * @param  hKpDivisorPOW2: new Kp divisor expressed as power of 2
  * @retval None
  */
-__weak void PID_SetKPDivisorPOW2( PID_Handle_t * pHandle, uint16_t hKpDivisorPOW2 )
-{
-  pHandle->hKpDivisorPOW2 = hKpDivisorPOW2;
-  pHandle->hKpDivisor = ( ( uint16_t )( 1u ) << hKpDivisorPOW2 );
+__weak void PID_SetKPDivisorPOW2(PID_Handle_t * pHandle,
+		uint16_t hKpDivisorPOW2) {
+	pHandle->hKpDivisorPOW2 = hKpDivisorPOW2;
+	pHandle->hKpDivisor = ((uint16_t) (1u) << hKpDivisorPOW2);
 }
 
 /**
@@ -176,9 +168,8 @@ __weak void PID_SetKPDivisorPOW2( PID_Handle_t * pHandle, uint16_t hKpDivisorPOW
  * @param  pHandle: handler of the current instance of the PID component
  * @retval Ki gain divisor
  */
-__weak uint16_t PID_GetKIDivisor( PID_Handle_t * pHandle )
-{
-  return ( pHandle->hKiDivisor );
+__weak uint16_t PID_GetKIDivisor(PID_Handle_t * pHandle) {
+	return (pHandle->hKiDivisor);
 }
 
 /**
@@ -187,13 +178,13 @@ __weak uint16_t PID_GetKIDivisor( PID_Handle_t * pHandle )
  * @param  hKiDivisorPOW2: new Ki divisor expressed as power of 2
  * @retval None
  */
-__weak void PID_SetKIDivisorPOW2( PID_Handle_t * pHandle, uint16_t hKiDivisorPOW2 )
-{
-  int32_t wKiDiv = ( ( int32_t )( 1u ) << hKiDivisorPOW2 );
-  pHandle->hKiDivisorPOW2 = hKiDivisorPOW2;
-  pHandle->hKiDivisor = ( uint16_t )( wKiDiv );
-  PID_SetUpperIntegralTermLimit( pHandle, ( int32_t )INT16_MAX * wKiDiv );
-  PID_SetLowerIntegralTermLimit( pHandle, ( int32_t ) - INT16_MAX * wKiDiv );
+__weak void PID_SetKIDivisorPOW2(PID_Handle_t * pHandle,
+		uint16_t hKiDivisorPOW2) {
+	int32_t wKiDiv = ((int32_t) (1u) << hKiDivisorPOW2);
+	pHandle->hKiDivisorPOW2 = hKiDivisorPOW2;
+	pHandle->hKiDivisor = (uint16_t) (wKiDiv);
+	PID_SetUpperIntegralTermLimit(pHandle, (int32_t) INT16_MAX * wKiDiv);
+	PID_SetLowerIntegralTermLimit(pHandle, (int32_t) - INT16_MAX * wKiDiv);
 }
 
 /**
@@ -202,9 +193,9 @@ __weak void PID_SetKIDivisorPOW2( PID_Handle_t * pHandle, uint16_t hKiDivisorPOW
  * @param  wLowerLimit: new lower integral term limit value
  * @retval None
  */
-__weak void PID_SetLowerIntegralTermLimit( PID_Handle_t * pHandle, int32_t wLowerLimit )
-{
-  pHandle->wLowerIntegralLimit = wLowerLimit;
+__weak void PID_SetLowerIntegralTermLimit(PID_Handle_t * pHandle,
+		int32_t wLowerLimit) {
+	pHandle->wLowerIntegralLimit = wLowerLimit;
 }
 
 /**
@@ -213,9 +204,9 @@ __weak void PID_SetLowerIntegralTermLimit( PID_Handle_t * pHandle, int32_t wLowe
  * @param  wUpperLimit: new upper integral term limit value
  * @retval None
  */
-__weak void PID_SetUpperIntegralTermLimit( PID_Handle_t * pHandle, int32_t wUpperLimit )
-{
-  pHandle->wUpperIntegralLimit = wUpperLimit;
+__weak void PID_SetUpperIntegralTermLimit(PID_Handle_t * pHandle,
+		int32_t wUpperLimit) {
+	pHandle->wUpperIntegralLimit = wUpperLimit;
 }
 
 /**
@@ -224,9 +215,8 @@ __weak void PID_SetUpperIntegralTermLimit( PID_Handle_t * pHandle, int32_t wUppe
  * @param  hLowerLimit: new lower output limit value
  * @retval None
  */
-__weak void PID_SetLowerOutputLimit( PID_Handle_t * pHandle, int16_t hLowerLimit )
-{
-  pHandle->hLowerOutputLimit = hLowerLimit;
+__weak void PID_SetLowerOutputLimit(PID_Handle_t * pHandle, int16_t hLowerLimit) {
+	pHandle->hLowerOutputLimit = hLowerLimit;
 }
 
 /**
@@ -235,9 +225,8 @@ __weak void PID_SetLowerOutputLimit( PID_Handle_t * pHandle, int16_t hLowerLimit
  * @param  hUpperLimit: new upper output limit value
  * @retval None
  */
-__weak void PID_SetUpperOutputLimit( PID_Handle_t * pHandle, int16_t hUpperLimit )
-{
-  pHandle->hUpperOutputLimit = hUpperLimit;
+__weak void PID_SetUpperOutputLimit(PID_Handle_t * pHandle, int16_t hUpperLimit) {
+	pHandle->hUpperOutputLimit = hUpperLimit;
 }
 
 /**
@@ -247,10 +236,10 @@ __weak void PID_SetUpperOutputLimit( PID_Handle_t * pHandle, int16_t hUpperLimit
  * @param  wPrevProcessVarError: New previous error variable
  * @retval None
  */
-__weak void PID_SetPrevError( PID_Handle_t * pHandle, int32_t wPrevProcessVarError )
-{
-  pHandle->wPrevProcessVarError = wPrevProcessVarError;
-  return;
+__weak void PID_SetPrevError(PID_Handle_t * pHandle,
+		int32_t wPrevProcessVarError) {
+	pHandle->wPrevProcessVarError = wPrevProcessVarError;
+	return;
 }
 
 /**
@@ -259,9 +248,8 @@ __weak void PID_SetPrevError( PID_Handle_t * pHandle, int32_t wPrevProcessVarErr
  * @param  hKdGain: new Kd gain
  * @retval None
  */
-__weak void PID_SetKD( PID_Handle_t * pHandle, int16_t hKdGain )
-{
-  pHandle->hKdGain = hKdGain;
+__weak void PID_SetKD(PID_Handle_t * pHandle, int16_t hKdGain) {
+	pHandle->hKdGain = hKdGain;
 }
 
 /**
@@ -269,9 +257,8 @@ __weak void PID_SetKD( PID_Handle_t * pHandle, int16_t hKdGain )
  * @param  pHandle: handler of the current instance of the PID component
  * @retval Kd gain
  */
-__weak int16_t PID_GetKD( PID_Handle_t * pHandle )
-{
-  return pHandle->hKdGain;
+__weak int16_t PID_GetKD(PID_Handle_t * pHandle) {
+	return pHandle->hKdGain;
 }
 
 /**
@@ -279,9 +266,8 @@ __weak int16_t PID_GetKD( PID_Handle_t * pHandle )
  * @param  pHandle: handler of the current instance of the PID component
  * @retval Kd gain divisor
  */
-__weak uint16_t PID_GetKDDivisor( PID_Handle_t * pHandle )
-{
-  return ( pHandle->hKdDivisor );
+__weak uint16_t PID_GetKDDivisor(PID_Handle_t * pHandle) {
+	return (pHandle->hKdDivisor);
 }
 
 /**
@@ -290,10 +276,10 @@ __weak uint16_t PID_GetKDDivisor( PID_Handle_t * pHandle )
  * @param pHandle handle on the instance of the PID component to update
  * @param hKdDivisorPOW2
  */
-__weak void PID_SetKDDivisorPOW2( PID_Handle_t * pHandle, uint16_t hKdDivisorPOW2 )
-{
-  pHandle->hKdDivisorPOW2 = hKdDivisorPOW2;
-  pHandle->hKdDivisor = ( ( uint16_t )( 1u ) << hKdDivisorPOW2 );
+__weak void PID_SetKDDivisorPOW2(PID_Handle_t * pHandle,
+		uint16_t hKdDivisorPOW2) {
+	pHandle->hKdDivisorPOW2 = hKdDivisorPOW2;
+	pHandle->hKdDivisor = ((uint16_t) (1u) << hKdDivisorPOW2);
 }
 
 #if defined (CCMRAM)
@@ -311,89 +297,71 @@ __attribute__( ( section ( ".ccmram" ) ) )
  *         value minus the present process variable value
  * @retval computed PI output
  */
-__weak int16_t PI_Controller( PID_Handle_t * pHandle, int32_t wProcessVarError )
-{
-  int32_t wProportional_Term, wIntegral_Term, wOutput_32, wIntegral_sum_temp;
-  int32_t wDischarge = 0;
-  int16_t hUpperOutputLimit = pHandle->hUpperOutputLimit;
-  int16_t hLowerOutputLimit = pHandle->hLowerOutputLimit;
+__weak int16_t PI_Controller(PID_Handle_t * pHandle, int32_t wProcessVarError) {
+	int32_t wProportional_Term, wIntegral_Term, wOutput_32, wIntegral_sum_temp;
+	int32_t wDischarge = 0;
+	int16_t hUpperOutputLimit = pHandle->hUpperOutputLimit;
+	int16_t hLowerOutputLimit = pHandle->hLowerOutputLimit;
 
-  /* Proportional term computation*/
-  wProportional_Term = pHandle->hKpGain * wProcessVarError;
+	/* Proportional term computation*/
+	wProportional_Term = pHandle->hKpGain * wProcessVarError;
 
-  /* Integral term computation */
-  if ( pHandle->hKiGain == 0 )
-  {
-    pHandle->wIntegralTerm = 0;
-  }
-  else
-  {
-    wIntegral_Term = pHandle->hKiGain * wProcessVarError;
-    wIntegral_sum_temp = pHandle->wIntegralTerm + wIntegral_Term;
+	/* Integral term computation */
+	if (pHandle->hKiGain == 0) {
+		pHandle->wIntegralTerm = 0;
+	} else {
+		wIntegral_Term = pHandle->hKiGain * wProcessVarError;
+		wIntegral_sum_temp = pHandle->wIntegralTerm + wIntegral_Term;
 
-    if ( wIntegral_sum_temp < 0 )
-    {
-      if ( pHandle->wIntegralTerm > 0 )
-      {
-        if ( wIntegral_Term > 0 )
-        {
-          wIntegral_sum_temp = INT32_MAX;
-        }
-      }
-    }
-    else
-    {
-      if ( pHandle->wIntegralTerm < 0 )
-      {
-        if ( wIntegral_Term < 0 )
-        {
-          wIntegral_sum_temp = -INT32_MAX;
-        }
-      }
-    }
+		if (wIntegral_sum_temp < 0) {
+			if (pHandle->wIntegralTerm > 0) {
+				if (wIntegral_Term > 0) {
+					wIntegral_sum_temp = INT32_MAX;
+				}
+			}
+		} else {
+			if (pHandle->wIntegralTerm < 0) {
+				if (wIntegral_Term < 0) {
+					wIntegral_sum_temp = -INT32_MAX;
+				}
+			}
+		}
 
-    if ( wIntegral_sum_temp > pHandle->wUpperIntegralLimit )
-    {
-      pHandle->wIntegralTerm = pHandle->wUpperIntegralLimit;
-    }
-    else if ( wIntegral_sum_temp < pHandle->wLowerIntegralLimit )
-    {
-      pHandle->wIntegralTerm = pHandle->wLowerIntegralLimit;
-    }
-    else
-    {
-      pHandle->wIntegralTerm = wIntegral_sum_temp;
-    }
-  }
+		if (wIntegral_sum_temp > pHandle->wUpperIntegralLimit) {
+			pHandle->wIntegralTerm = pHandle->wUpperIntegralLimit;
+		} else if (wIntegral_sum_temp < pHandle->wLowerIntegralLimit) {
+			pHandle->wIntegralTerm = pHandle->wLowerIntegralLimit;
+		} else {
+			pHandle->wIntegralTerm = wIntegral_sum_temp;
+		}
+	}
 
 #ifdef FULL_MISRA_C_COMPLIANCY
-  wOutput_32 = ( wProportional_Term / ( int32_t )pHandle->hKpDivisor ) + ( pHandle->wIntegralTerm /
-               ( int32_t )pHandle->hKiDivisor );
+	wOutput_32 = ( wProportional_Term / ( int32_t )pHandle->hKpDivisor ) + ( pHandle->wIntegralTerm /
+			( int32_t )pHandle->hKiDivisor );
 #else
-  /* WARNING: the below instruction is not MISRA compliant, user should verify
-             that Cortex-M3 assembly instruction ASR (arithmetic shift right)
-             is used by the compiler to perform the shifts (instead of LSR
-             logical shift right)*/
-  wOutput_32 = ( wProportional_Term >> pHandle->hKpDivisorPOW2 ) + ( pHandle->wIntegralTerm >> pHandle->hKiDivisorPOW2 );
+	/* WARNING: the below instruction is not MISRA compliant, user should verify
+	 that Cortex-M3 assembly instruction ASR (arithmetic shift right)
+	 is used by the compiler to perform the shifts (instead of LSR
+	 logical shift right)*/
+	wOutput_32 = (wProportional_Term >> pHandle->hKpDivisorPOW2)
+			+ (pHandle->wIntegralTerm >> pHandle->hKiDivisorPOW2);
 #endif
 
-  if ( wOutput_32 > hUpperOutputLimit )
-  {
+	if (wOutput_32 > hUpperOutputLimit) {
 
-    wDischarge = hUpperOutputLimit - wOutput_32;
-    wOutput_32 = hUpperOutputLimit;
-  }
-  else if ( wOutput_32 < hLowerOutputLimit )
-  {
+		wDischarge = hUpperOutputLimit - wOutput_32;
+		wOutput_32 = hUpperOutputLimit;
+	} else if (wOutput_32 < hLowerOutputLimit) {
 
-    wDischarge = hLowerOutputLimit - wOutput_32;
-    wOutput_32 = hLowerOutputLimit;
-  }
-  else { /* Nothing to do here */ }
+		wDischarge = hLowerOutputLimit - wOutput_32;
+		wOutput_32 = hLowerOutputLimit;
+	} else { /* Nothing to do here */
+	}
 
-  pHandle->wIntegralTerm += wDischarge;
+	pHandle->wIntegralTerm += wDischarge;
 
-  return ( ( int16_t )( wOutput_32 ) );
+	return ((int16_t) (wOutput_32));
 }
 
 #if defined (CCMRAM)
@@ -411,48 +379,42 @@ __attribute__( ( section ( ".ccmram" ) ) )
  *         reference value minus the present process variable value
  * @retval PID computed output
  */
+#define DER 50
 
-__weak int16_t PID_Controller( PID_Handle_t * pHandle, int32_t wProcessVarError )
-{
-  int32_t wDifferential_Term;
-  int32_t wDeltaError;
-  int32_t wTemp_output;
-
-  if ( pHandle->hKdGain != 0 ) /* derivative terms not used */
-  {
-    wDeltaError = wProcessVarError - pHandle->wPrevProcessVarError;
-    wDifferential_Term = pHandle->hKdGain * wDeltaError;
+__weak int16_t PID_Controller(PID_Handle_t * pHandle, int32_t wProcessVarError) {
+	int32_t wDifferential_Term;
+	int32_t wDeltaError;
+	int32_t wTemp_output;
+	/*if (pHandle->hKdGain != 0)
+	{
+		wDeltaError = wProcessVarError - pHandle->wPrevProcessVarError;
+		wDifferential_Term = pHandle->hKdGain * wDeltaError;
 
 #ifdef FULL_MISRA_C_COMPLIANCY
-    wDifferential_Term /= ( int32_t )pHandle->hKdDivisor;
+		wDifferential_Term /= ( int32_t )pHandle->hKdDivisor;
 #else
-    /* WARNING: the below instruction is not MISRA compliant, user should verify
-    that Cortex-M3 assembly instruction ASR (arithmetic shift right)
-    is used by the compiler to perform the shifts (instead of LSR
-    logical shift right)*/
-    wDifferential_Term >>= pHandle->hKdDivisorPOW2;
+		wDifferential_Term >>= pHandle->hKdDivisorPOW2;
 #endif
 
-    pHandle->wPrevProcessVarError = wProcessVarError;
+		pHandle->wPrevProcessVarError = wProcessVarError;
 
-    wTemp_output = PI_Controller( pHandle, wProcessVarError ) + wDifferential_Term;
+		wTemp_output = PI_Controller(pHandle, wProcessVarError)
+				+ wDifferential_Term;
 
-    if ( wTemp_output > pHandle->hUpperOutputLimit )
-    {
-      wTemp_output = pHandle->hUpperOutputLimit;
-    }
-    else if ( wTemp_output < pHandle->hLowerOutputLimit )
-    {
-      wTemp_output = pHandle->hLowerOutputLimit;
-    }
-    else
-    {}
-  }
-  else
-  {
-    wTemp_output = PI_Controller( pHandle, wProcessVarError );
-  }
-  return ( ( int16_t ) wTemp_output );
+		if (wTemp_output > pHandle->hUpperOutputLimit) {
+			wTemp_output = pHandle->hUpperOutputLimit;
+		} else if (wTemp_output < pHandle->hLowerOutputLimit) {
+			wTemp_output = pHandle->hLowerOutputLimit;
+		} else {
+		}
+	} else {
+		wTemp_output = PI_Controller(pHandle, wProcessVarError);
+	}*/
+	wDeltaError = (wProcessVarError - pHandle->wPrevProcessVarError)*DER;
+	pHandle->wPrevProcessVarError=wProcessVarError;
+	pHandle->wIntegralTerm += wProcessVarError*pHandle->hDefKiGain;
+	wTemp_output = wDeltaError + pHandle->wIntegralTerm/256 + wProcessVarError * pHandle->hDefKpGain/16;
+	return ((int16_t) wTemp_output);
 }
 /**
  * @}

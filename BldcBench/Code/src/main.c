@@ -6,11 +6,11 @@
 #define SPEED_K 2000
 #define SPEED_PI 500
 #define SPEED_D 100
-#define APPLICATION_SPEED 1000
+#define APPLICATION_SPEED 1500
 
-#define STEP_MAX 2000
+#define STEP_MAX 1500
 #define STEP_MIN 0
-#define STEP_T 2000 
+#define STEP_T 8000 
 
 extern float speed;
 uint8_t motorState=0;
@@ -25,11 +25,11 @@ SemaphoreHandle_t buttonClickSemaphore;
 
 typedef struct
 {
-	int32_t referenceSpeed;
+	//int32_t referenceSpeed;
 	int32_t measureSpeed;
-	int16_t regulatorReferenceTorque;
-	int16_t measureTorque;
-	uint32_t timeStamp;
+	//int16_t regulatorReferenceTorque;
+	//int16_t measureTorque;
+	uint16_t timeStamp;
 }motorData_t;
 
 void speedCntrTask(void* pvParameters)
@@ -54,20 +54,27 @@ void measureTask(void* pvParameters)
 	{
 		taskENTER_CRITICAL(); 
 		{
-			error[0]=getSpeed(USART1,&data.measureSpeed);
+			getSpeed(USART1,&data.measureSpeed);
 			//error[1]=getTorque(USART1,&data.measureTorque);
 			//error[2]=getRegulatorTorqueRef(USART1,&data.regulatorReferenceTorque);
 			//data.regulatorReferenceTorque=data.measureTorque;
 			//error[2]=ERROR_NONE;
 			//error[3]=getReferenceSpeed(USART1,&data.referenceSpeed);
-			data.timeStamp=TIM5->CNT;
+			data.timeStamp=TIM4->CNT;
 		}			
 		taskEXIT_CRITICAL(); 
-		if(error[0]==ERROR_NONE /*&& error[1]==ERROR_NONE && error[2]==ERROR_NONE && error[3]==ERROR_NONE*/)
+		uartTransmitt(11,USART2);
+		uartTransmittBuff((uint8_t*)&data.measureSpeed,sizeof(int32_t),USART2);
+		uartTransmittBuff((uint8_t*)&data.timeStamp,sizeof(uint16_t),USART2);
+		//uartTransmittBuff((uint8_t*)&data,sizeof(motorData_t),USART2);
+		/*taskENTER_CRITICAL(); 
 		{
-			uartTransmitt(11,USART2);
-			uartTransmittBuff((uint8_t*)&data,sizeof(motorData_t),USART2);
+			data.measureSpeed=(uint16_t)speed;
+			data.timeStamp=(uint16_t)TIM4->CNT;
 		}
+		taskEXIT_CRITICAL();
+		uartTransmitt(11,USART2);
+		uartTransmittBuff((uint8_t*)&data,sizeof(motorData_t),USART2);*/
 	}
 }
 
@@ -85,8 +92,8 @@ void controlTask(void* pvParameters)
 				GPIOA->BSRR=GPIO_BSRR_BS5;
 				setSpeed(0,1,USART1);
 				error=startMotor(USART1);	
-				TIM5->CNT=0;
-				TIM5->CR1|=TIM_CR1_CEN;
+				TIM4->CNT=0;
+				TIM4->CR1|=TIM_CR1_CEN;
 				xTaskCreate(speedCntrTask,"speedCntrTask",configMINIMAL_STACK_SIZE,NULL,configMAX_PRIORITIES-2,&speedCntrTaskHandle);
 				vTaskResume(measureTaskHandle);
 			}
@@ -96,7 +103,7 @@ void controlTask(void* pvParameters)
 				vTaskDelete(speedCntrTaskHandle);
 				vTaskSuspend(measureTaskHandle);				
 				error=stopMotor(USART1);	
-				TIM5->CR1&=~TIM_CR1_CEN;
+				TIM4->CR1&=~TIM_CR1_CEN;
 			}
 			if(error==ERROR_NONE) motorState=~motorState;
 		}
@@ -176,26 +183,26 @@ void buttonInit(void)
 	__enable_irq();
 }
 
-void Tim5Init()
+void Tim4Init()
 {
-	RCC->APB1ENR|=RCC_APB1ENR_TIM5EN;
-	TIM5->CNT=0;
-	TIM5->PSC=10000-1; 
-	TIM5->EGR|=TIM_EGR_UG;//!!Генерация update event для запись предделителя!!
-	TIM5->ARR=0xFFFFFFFF;	
-	TIM5->CR1|=TIM_CR1_CEN;
-}   
+	RCC->APB1ENR|=RCC_APB1ENR_TIM4EN;
+	TIM4->CNT=0;
+	TIM4->PSC=10000-1; 
+	TIM4->EGR|=TIM_EGR_UG;//!!Генерация update event для запись предделителя!!
+	TIM4->ARR=0xFFFF;	
+	TIM4->CR1|=TIM_CR1_CEN;
+} 
 mcpErrorCode err;
 int main()
 {
  	RccClockInit();
 	//encoderInit();
 	uart2Init(100000000,115200);
-	uart1Init(100000000,12000);
+	uart1Init(100000000,115200);
 	buttonInit();
-	err=setTorquePID(CURRENT_K,CURRENT_PI,0,USART1);
+	/*err=setTorquePID(CURRENT_K,CURRENT_PI,0,USART1);
 	err=setFluxPID(CURRENT_K,CURRENT_PI,0,USART1);
-	err=setSpeedPID(SPEED_K,SPEED_PI,SPEED_D,USART1);
+	err=setSpeedPID(SPEED_K,SPEED_PI,SPEED_D,USART1);*/
 	//err=setSpeed(APPLICATION_SPEED,1,USART1);
 	RCC->AHB1ENR|=RCC_AHB1ENR_GPIOAEN;
 	GPIOA->MODER|=GPIO_MODER_MODE5_0;
@@ -209,7 +216,7 @@ int main()
 	xTaskCreate(controlTask,"controlTask",configMINIMAL_STACK_SIZE,NULL,configMAX_PRIORITIES-1,NULL);
 	
 	//xTaskCreate(commandReciveTask,"commandReciveTask",configMINIMAL_STACK_SIZE,NULL,configMAX_PRIORITIES-1,NULL);
-	Tim5Init();
+	Tim4Init();
 	vTaskStartScheduler();
 	while(1)
 	{

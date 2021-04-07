@@ -1,11 +1,13 @@
 #include "encoder.h"
-
+#include "bsp.h"
 uint16_t encoderCount;
 uint8_t statusFlag=0;
 double speed;
 
 void TIM2_IRQHandler()
 { 
+	uint16_t tempSpeed;
+	uint16_t time;
 	if(TIM2->SR & TIM_SR_UIF)
 	{
 		TIM2->SR&=~TIM_SR_UIF;
@@ -21,6 +23,12 @@ void TIM2_IRQHandler()
 			TIM5->CR1&=~TIM_CR1_CEN;
 			statusFlag=0;
 			TIM5->CNT=0;
+			/*tempSpeed=(uint16_t)speed;
+			time=TIM4->CNT;
+			uartTransmitt(11,USART2);
+			uartTransmittBuff((uint8_t*)&tempSpeed,sizeof(uint16_t),USART2);
+			uartTransmittBuff((uint8_t*)&time,sizeof(uint16_t),USART2);*/
+			
 		}
 	}
 }
@@ -41,6 +49,7 @@ void tim5Init()
 {
 	RCC->APB1ENR|=RCC_APB1ENR_TIM5EN;
 	TIM5->PSC=100-1;
+	TIM5->EGR|=TIM_EGR_UG;//!!Генерация update event для запись предделителя!!
 	TIM5->ARR=0xFFFFFFFF;
 	TIM5->DIER|=TIM_DIER_UIE;
 	NVIC_EnableIRQ(TIM5_IRQn);

@@ -67,12 +67,12 @@
 #define REGULATION_EXECUTION_RATE     1    /*!< FOC execution rate in 
                                                            number of PWM cycles */     
 /* Gains values for torque and flux control loops */
-#define PID_TORQUE_KP_DEFAULT         3081       
-#define PID_TORQUE_KI_DEFAULT         2054
-#define PID_TORQUE_KD_DEFAULT         100
-#define PID_FLUX_KP_DEFAULT           3081
-#define PID_FLUX_KI_DEFAULT           2054
-#define PID_FLUX_KD_DEFAULT           100
+#define PID_TORQUE_KP_DEFAULT         700//3081//
+#define PID_TORQUE_KI_DEFAULT         500//2054//
+#define PID_TORQUE_KD_DEFAULT         50//
+#define PID_FLUX_KP_DEFAULT           700//3081//
+#define PID_FLUX_KI_DEFAULT           500//2054//
+#define PID_FLUX_KD_DEFAULT           50
 
 /* Torque/Flux control loop gains dividers*/
 #define TF_KPDIV                      128
@@ -87,9 +87,9 @@
 #define SPEED_LOOP_FREQUENCY_HZ       1000 /*!<Execution rate of speed   
                                                       regulation loop (Hz) */
                                         
-#define PID_SPEED_KP_DEFAULT          1000/(SPEED_UNIT/10) /* Workbench compute the gain for 01Hz unit*/
-#define PID_SPEED_KI_DEFAULT          700/(SPEED_UNIT/10) /* Workbench compute the gain for 01Hz unit*/
-#define PID_SPEED_KD_DEFAULT          0/(SPEED_UNIT/10) /* Workbench compute the gain for 01Hz unit*/
+#define PID_SPEED_KP_DEFAULT          300//1000/(SPEED_UNIT/10)// /* Workbench compute the gain for 01Hz unit*/
+#define PID_SPEED_KI_DEFAULT          70//700/(SPEED_UNIT/10)// /* Workbench compute the gain for 01Hz unit*/
+#define PID_SPEED_KD_DEFAULT          50//0/(SPEED_UNIT/10)// /* Workbench compute the gain for 01Hz unit*/
 /* Speed PID parameter dividers */
 #define SP_KPDIV                      16
 #define SP_KIDIV                      256
@@ -103,7 +103,7 @@
 /* USER CODE END PID_SPEED_INTEGRAL_INIT_DIV */
 
 #define SPD_DIFFERENTIAL_TERM_ENABLING DISABLE
-#define IQMAX                          10000
+#define IQMAX                          15000
 
 /* Default settings */
 #define DEFAULT_CONTROL_MODE           STC_SPEED_MODE /*!< STC_TORQUE_MODE or 

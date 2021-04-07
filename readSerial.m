@@ -10,10 +10,9 @@ while 1
         break;
     end
 end
-while (length(speed)~=700)
-    speed=[speed fread(com,[2 1],'int32')];
-    torque=[torque fread(com,[2 1],'int16')];
-    time=[time fread(com,1,'uint32')];
+while (length(speed)~=1000)
+    speed=[speed fread(com,1,'int32')];
+    time=[time fread(com,1,'uint16')];
     fread(com,1,'uint8');
 end
 
@@ -33,7 +32,7 @@ time=(time-time(1))/100000;
 % title("Measure torque")
 figure
 grid on
-plot(time,speed(2,:))
+plot(time,speed)
 title("Measure speed")
-saveSpeed=speed(2,:);
+saveSpeed=speed;
 save('speed2000.mat','saveSpeed','time');

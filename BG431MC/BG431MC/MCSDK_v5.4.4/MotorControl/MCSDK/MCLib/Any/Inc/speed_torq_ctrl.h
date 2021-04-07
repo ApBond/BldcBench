@@ -31,7 +31,7 @@ extern "C" {
 #include "mc_type.h"
 #include "pid_regulator.h"
 #include "speed_pos_fdbk.h"
-
+#include "fuzzy.h"
 /** @addtogroup MCSDK
   * @{
   */
