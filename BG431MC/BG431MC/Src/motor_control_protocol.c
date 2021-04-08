@@ -163,6 +163,7 @@ __weak void MCP_SentFrame(MCP_Handle_t *pHandle, uint8_t Code, uint8_t *buffer, 
 * @param  Size size of data frame.
 */
 extern int16_t tempTorque;
+extern int16_t hTorqueReference;
 
 __weak void MCP_ReceivedFrame(MCP_Handle_t *pHandle, uint8_t Code, uint8_t *buffer, uint8_t Size)
 {
@@ -483,6 +484,7 @@ __weak void MCP_ReceivedFrame(MCP_Handle_t *pHandle, uint8_t Code, uint8_t *buff
       uint8_t bCmdID = buffer[0];
       bErrorCode = ERROR_CODE_WRONG_CMD;
       bNoError = UI_ExecCmd(&pHandle->_Super,bCmdID);
+      hTorqueReference = 0;
     }
     break;
 

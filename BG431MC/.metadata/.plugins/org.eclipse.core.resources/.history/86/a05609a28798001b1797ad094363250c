@@ -1,0 +1,486 @@
+/*
+ * fuzzy.c
+ *
+ *  Created on: 20 мар. 2021 г.
+ *      Author: aligtr
+ */
+
+#include "fuzzy.h"
+
+/*int main() {
+	float der = 2;//error' = (v-v_t)'
+	float er = 8;//error = (v-v_t)
+	float TargetMoment = 0;
+	TargetMoment = fuzzyController(er, der);
+	return 0;
+}*/
+
+int16_t fuzzyController(int16_t er, int16_t der) {
+	/*????????????? ??????? ??????????????*/
+	int16_t muEr[ER_TERMS_COUNT] = { 0,0,0 };
+	int16_t muDEr[DER_TERMS_COUNT] = { 0,0,0 };
+
+	/*???????? ??????????*/
+	int16_t TargetMoment = 0;
+
+	/*???????*/
+	rull MomRull[MOMENT_RULLS_COUNT];
+	rull MomRull1[37];
+	/*????????????? ??????*/
+	term er_var[ER_TERMS_COUNT];
+	term der_var[DER_TERMS_COUNT];
+	term moment_var[MOMENT_TERMS_COUNT];
+
+	/*????? ????????*/
+	int8_t i = 0;
+
+	/*???????? ??????????????? ??????????*//*??????????? ??????*/
+	/*er_var[OB].min = -60;
+	er_var[OB].max = -20;
+	er_var[OB].shape = TYPE_Z;
+
+	er_var[OC].min = -60;
+	er_var[OC].max = -6;
+	er_var[OC].pic = -20;
+	er_var[OC].shape = TRIANGLE;
+
+	er_var[OM].min = -20;
+	er_var[OM].max = -0;
+	er_var[OM].pic = -6;
+	er_var[OM].shape = TRIANGLE;
+
+	er_var[H].min = -6;
+	er_var[H].max = 6;
+	er_var[H].pic = 0;
+	er_var[H].shape = TRIANGLE;
+
+	er_var[PM].min = 0;
+	er_var[PM].max = 20;
+	er_var[PM].pic = 6;
+	er_var[PM].shape = TRIANGLE;
+
+	er_var[PC].min = 6;
+	er_var[PC].max = 60;
+	er_var[PC].pic = 20;
+	er_var[PC].shape = TRIANGLE;
+
+	er_var[PB].min = 20;
+	er_var[PB].max = 60;
+	er_var[PB].shape = TYPE_S;
+
+
+	der_var[OB].min = -10;
+	der_var[OB].max = -3;
+	der_var[OB].shape = TYPE_Z;
+
+	der_var[OC].min = -10;
+	der_var[OC].max = -1;
+	der_var[OC].pic = -3;
+	der_var[OC].shape = TRIANGLE;
+
+	der_var[OM].min = -3;
+	der_var[OM].max = 0;
+	der_var[OM].pic = -1;
+	der_var[OM].shape = TRIANGLE;
+
+	der_var[H].min = -1;
+	der_var[H].max = 1;
+	der_var[H].pic = 0;
+	der_var[H].shape = TRIANGLE;
+
+	der_var[PM].min = 0;
+	der_var[PM].max = 3;
+	der_var[PM].pic = 1;
+	der_var[PM].shape = TRIANGLE;
+
+	der_var[PC].min = 1;
+	der_var[PC].max = 10;
+	der_var[PC].pic = 3;
+	der_var[PC].shape = TRIANGLE;
+
+	der_var[PB].min = 3;
+	der_var[PB].max = 10;
+	der_var[PB].shape = TYPE_S;
+
+
+
+	moment_var[OB].min = -6;
+	moment_var[OB].max = -3;
+	moment_var[OB].shape = TYPE_Z;
+
+	moment_var[OC].min = -6;
+	moment_var[OC].max = -1;
+	moment_var[OC].pic = -3;
+	moment_var[OC].shape = TRIANGLE;
+
+	moment_var[OM].min = -3;
+	moment_var[OM].max = 0;
+	moment_var[OM].pic = -1;
+	moment_var[OM].shape = TRIANGLE;
+
+	moment_var[H].min = -1;
+	moment_var[H].max = 1;
+	moment_var[H].pic = 0;
+	moment_var[H].shape = TRIANGLE;
+
+	moment_var[PM].min = 0;
+	moment_var[PM].max = 3;
+	moment_var[PM].pic = 1;
+	moment_var[PM].shape = TRIANGLE;
+
+	moment_var[PC].min = 1;
+	moment_var[PC].max = 6;
+	moment_var[PC].pic = 3;
+	moment_var[PC].shape = TRIANGLE;
+
+	moment_var[PB].min = 3;
+	moment_var[PB].max = 6;
+	moment_var[PB].shape = TYPE_S;
+*/
+
+	er_var[OB].min = -150;
+	er_var[OB].max = -100;
+	er_var[OB].shape = TYPE_Z;
+
+	er_var[OC].min = -150;
+	er_var[OC].max = -20;
+	er_var[OC].pic = -100;
+	er_var[OC].shape = TRIANGLE;
+
+	er_var[OM].min = -100;
+	er_var[OM].max = -0;
+	er_var[OM].pic = -20;
+	er_var[OM].shape = TRIANGLE;
+
+	er_var[H].min = -20;
+	er_var[H].max =20;
+	er_var[H].pic = 0;
+	er_var[H].shape = TRIANGLE;
+
+	er_var[PM].min = 0;
+	er_var[PM].max = 100;
+	er_var[PM].pic = 20;
+	er_var[PM].shape = TRIANGLE;
+
+	er_var[PC].min = 20;
+	er_var[PC].max = 150;
+	er_var[PC].pic = 100;
+	er_var[PC].shape = TRIANGLE;
+
+	er_var[PB].min = 100;
+	er_var[PB].max = 150;
+	er_var[PB].shape = TYPE_S;
+
+
+	der_var[OB].min = -15;
+	der_var[OB].max = -10;
+	der_var[OB].shape = TYPE_Z;
+
+	der_var[OC].min = -15;
+	der_var[OC].max = -5;
+	der_var[OC].pic = -10;
+	der_var[OC].shape = TRIANGLE;
+
+	der_var[OM].min = -10;
+	der_var[OM].max = 0;
+	der_var[OM].pic = -5;
+	der_var[OM].shape = TRIANGLE;
+
+	der_var[H].min = -5;
+	der_var[H].max = 5;
+	der_var[H].pic = 0;
+	der_var[H].shape = TRIANGLE;
+
+	der_var[PM].min = 0;
+	der_var[PM].max = 10;
+	der_var[PM].pic = 5;
+	der_var[PM].shape = TRIANGLE;
+
+	der_var[PC].min = 5;
+	der_var[PC].max = 15;
+	der_var[PC].pic = 10;
+	der_var[PC].shape = TRIANGLE;
+
+	der_var[PB].min = 10;
+	der_var[PB].max = 15;
+	der_var[PB].shape = TYPE_S;
+
+
+
+	moment_var[OB].min = -16;
+	moment_var[OB].max = -4;
+	moment_var[OB].shape = TYPE_Z;
+
+	moment_var[OC].min = -13;
+	moment_var[OC].max = -1;
+	moment_var[OC].pic = -4;
+	moment_var[OC].shape = TRIANGLE;
+
+	moment_var[OM].min = -4;
+	moment_var[OM].max = 0;
+	moment_var[OM].pic = -1;
+	moment_var[OM].shape = TRIANGLE;
+
+	moment_var[H].min = -1;
+	moment_var[H].max = 1;
+	moment_var[H].pic = 0;
+	moment_var[H].shape = TRIANGLE;
+
+	moment_var[PM].min = 0;
+	moment_var[PM].max = 4;
+	moment_var[PM].pic = 1;
+	moment_var[PM].shape = TRIANGLE;
+
+	moment_var[PC].min = 1;
+	moment_var[PC].max = 13;
+	moment_var[PC].pic = 4;
+	moment_var[PC].shape = TRIANGLE;
+
+	moment_var[PB].min = 4;
+	moment_var[PB].max = 16;
+	moment_var[PB].shape = TYPE_S;
+
+
+	/*???????????*/
+	for (i = 0; i < ER_TERMS_COUNT; i++) {
+		muEr[i] = fuzzifier(er_var[i], er);
+	}
+
+	for (i = 0; i < DER_TERMS_COUNT; i++) {
+		muDEr[i] = fuzzifier(der_var[i], der);
+	}
+
+	/*???? ?????? + ??????????*/
+	//???? ? ????, ?? ? ????, ?????, ????? ?', ??????? ?'
+	//? ???????? ?????????????? mu
+	//??????? ????????? ? ????????? (?????) i
+
+
+	// ??????? ??? ????????? ?-??????????
+	// ????? ??? ??????? ?????? ??????
+	/*MomRull[0].mu = muEr[OB];
+	MomRull[0].term = OB;
+	MomRull[1].mu = muEr[OC];
+	MomRull[1].term = OC;
+	MomRull[2].mu = muEr[OM];
+	MomRull[2].term = OM;
+	MomRull[3].mu = muEr[H];
+	MomRull[3].term = H;
+	MomRull[4].mu = muEr[PM];
+	MomRull[4].term = PM;
+	MomRull[5].mu = muEr[PC];
+	MomRull[5].term = PC;
+	MomRull[6].mu = muEr[PB];
+	MomRull[6].term = PB;*/
+/*
+	MomRull1[0].mu = fuzzyAnd(fuzzyOr(muEr[H],fuzzyOr(muEr[OM],fuzzyOr(muEr[OC],muEr[OB]))), muDEr[OB]);
+	MomRull1[0].term = OB;
+	MomRull1[1].mu = fuzzyAnd(fuzzyOr(muEr[OM],fuzzyOr(muEr[OC],muEr[OB])), muDEr[OC]);
+	MomRull1[1].term = OB;
+	MomRull1[2].mu = fuzzyAnd(fuzzyOr(muEr[OC],muEr[OB]), muDEr[OM]);
+	MomRull1[2].term = OB;
+	MomRull1[3].mu = fuzzyAnd(muEr[OB], muDEr[H]);
+	MomRull1[3].term = OB;
+	MomRull[0].mu = fuzzyOr(MomRull1[3].mu,fuzzyOr(MomRull1[2].mu,fuzzyOr(MomRull1[0].mu,MomRull1[1].mu)));
+	MomRull[0].term = OB;
+
+
+	MomRull1[4].mu = fuzzyAnd(muEr[OB], muDEr[PM]);
+	MomRull1[4].term = OC;
+	MomRull1[5].mu = fuzzyAnd(muEr[OC], muDEr[H]);
+	MomRull1[5].term = OC;
+	MomRull1[6].mu = fuzzyAnd(muEr[OM], muDEr[OM]);
+	MomRull1[6].term = OC;
+	MomRull1[7].mu = fuzzyAnd(muEr[H], muDEr[OC]);
+	MomRull1[7].term = OC;
+	MomRull1[8].mu = fuzzyAnd(muEr[PM], muDEr[OB]);
+	MomRull1[8].term = OC;
+	MomRull[1].mu = fuzzyOr(MomRull1[8].mu,fuzzyOr(MomRull1[7].mu,fuzzyOr(MomRull1[5].mu,fuzzyOr(MomRull1[5].mu,MomRull1[4].mu))));
+	MomRull[1].term = OC;
+
+	MomRull1[9].mu = fuzzyAnd(muEr[OB], muDEr[PC]);
+	MomRull1[9].term = OM;
+	MomRull1[10].mu = fuzzyAnd(muEr[OC], muDEr[PM]);
+	MomRull1[10].term = OM;
+	MomRull1[11].mu = fuzzyAnd(muEr[OM], muDEr[H]);
+	MomRull1[11].term = OM;
+	MomRull1[12].mu = fuzzyAnd(muEr[H], muDEr[OM]);
+	MomRull1[12].term = OM;
+	MomRull1[13].mu = fuzzyAnd(muEr[PM], muDEr[OC]);
+	MomRull1[13].term = OM;
+	MomRull1[14].mu = fuzzyAnd(muEr[PC], muDEr[OB]);
+	MomRull1[14].term = OM;
+	MomRull[2].mu = fuzzyOr(MomRull1[14].mu,fuzzyOr(MomRull1[13].mu,fuzzyOr(MomRull1[12].mu,fuzzyOr(MomRull1[11].mu,fuzzyOr(MomRull1[10].mu,MomRull1[9].mu)))));
+	MomRull[2].term = OM;
+
+	MomRull1[15].mu = fuzzyAnd(muEr[OB], muDEr[PB]);
+	MomRull1[15].term = H;
+	MomRull1[16].mu = fuzzyAnd(muEr[OC], muDEr[PC]);
+	MomRull1[16].term = H;
+	MomRull1[17].mu = fuzzyAnd(muEr[OM], muDEr[PM]);
+	MomRull1[17].term = H;
+	MomRull1[18].mu = fuzzyAnd(muEr[H], muDEr[H]);
+	MomRull1[18].term = H;
+	MomRull1[19].mu = fuzzyAnd(muEr[PM], muDEr[OM]);
+	MomRull1[19].term = H;
+	MomRull1[20].mu = fuzzyAnd(muEr[PC], muDEr[OC]);
+	MomRull1[20].term = H;
+	MomRull1[21].mu = fuzzyAnd(muEr[PB], muDEr[OB]);
+	MomRull1[21].term = H;
+	MomRull[3].mu = fuzzyOr(MomRull1[21].mu,fuzzyOr(MomRull1[20].mu,fuzzyOr(MomRull1[19].mu,fuzzyOr(MomRull1[18].mu,fuzzyOr(MomRull1[17].mu,fuzzyOr(MomRull1[16].mu,MomRull1[15].mu))))));
+	MomRull[3].term = H;
+
+	MomRull1[22].mu = fuzzyAnd(muEr[PB], muDEr[OC]);
+	MomRull1[22].term = PM;
+	MomRull1[23].mu = fuzzyAnd(muEr[PC], muDEr[OM]);
+	MomRull1[23].term = PM;
+	MomRull1[24].mu = fuzzyAnd(muEr[PM], muDEr[H]);
+	MomRull1[24].term = PM;
+	MomRull1[25].mu = fuzzyAnd(muEr[H], muDEr[PM]);
+	MomRull1[25].term = PM;
+	MomRull1[26].mu = fuzzyAnd(muEr[OM], muDEr[PC]);
+	MomRull1[26].term = PM;
+	MomRull1[27].mu = fuzzyAnd(muEr[OC], muDEr[PB]);
+	MomRull1[27].term = PM;
+	MomRull[4].mu = fuzzyOr(MomRull1[27].mu,fuzzyOr(MomRull1[26].mu,fuzzyOr(MomRull1[25].mu,fuzzyOr(MomRull1[24].mu,fuzzyOr(MomRull1[23].mu,MomRull1[22].mu)))));
+	MomRull[4].term = PM;
+
+	MomRull1[28].mu = fuzzyAnd(muEr[PB], muDEr[OM]);
+	MomRull1[28].term = PC;
+	MomRull1[29].mu = fuzzyAnd(muEr[PC], muDEr[H]);
+	MomRull1[29].term = PC;
+	MomRull1[30].mu = fuzzyAnd(muEr[PM], muDEr[PM]);
+	MomRull1[30].term = PC;
+	MomRull1[31].mu = fuzzyAnd(muEr[H], muDEr[PC]);
+	MomRull1[31].term = PC;
+	MomRull1[32].mu = fuzzyAnd(muEr[OM], muDEr[PB]);
+	MomRull1[32].term = PC;
+	MomRull[5].mu = fuzzyOr(MomRull1[32].mu,fuzzyOr(MomRull1[31].mu,fuzzyOr(MomRull1[30].mu,fuzzyOr(MomRull1[29].mu,MomRull1[28].mu))));
+	MomRull[5].term = PC;
+
+	MomRull1[33].mu = fuzzyAnd(fuzzyOr(muEr[H],fuzzyOr(muEr[PM],fuzzyOr(muEr[PC],muEr[PB]))), muDEr[PB]);
+	MomRull1[33].term = PB;
+	MomRull1[34].mu = fuzzyAnd(fuzzyOr(muEr[PM],fuzzyOr(muEr[PC],muEr[PB])), muDEr[PC]);
+	MomRull1[34].term = PB;
+	MomRull1[35].mu = fuzzyAnd(fuzzyOr(muEr[PC],muEr[PB]), muDEr[PM]);
+	MomRull1[35].term = PB;
+	MomRull1[36].mu = fuzzyAnd(muEr[PB], muDEr[H]);
+	MomRull1[36].term = PB;
+	MomRull[6].mu = fuzzyOr(MomRull1[36].mu,fuzzyOr(MomRull1[35].mu,fuzzyOr(MomRull1[34].mu,MomRull1[33].mu)));
+	MomRull[6].term = PB;
+*/
+	MomRull[0].mu = fuzzyAnd(muEr[OB], muDEr[OB]);
+	MomRull[0].term = OB;
+	MomRull[1].mu = fuzzyAnd(muEr[OC], muDEr[OB]);
+	MomRull[1].term = OB;
+	MomRull[2].mu = fuzzyAnd(muEr[OM], muDEr[OB]);
+	MomRull[2].term = OB;
+	MomRull[3].mu = fuzzyAnd(muEr[H], muDEr[OB]);
+	MomRull[3].term = OB;
+	MomRull[4].mu = fuzzyAnd(muEr[OB], muDEr[OC]);
+	MomRull[4].term = OB;
+	MomRull[5].mu = fuzzyAnd(muEr[OC], muDEr[OC]);
+	MomRull[5].term = OB;
+	MomRull[6].mu = fuzzyAnd(muEr[OM], muDEr[OC]);
+	MomRull[6].term = OB;
+	MomRull[7].mu = fuzzyAnd(muEr[OB], muDEr[OM]);
+	MomRull[7].term = OB;
+	MomRull[8].mu = fuzzyAnd(muEr[OC], muDEr[OM]);
+	MomRull[8].term = OB;
+	MomRull[9].mu = fuzzyAnd(muEr[OB], muDEr[H]);
+	MomRull[9].term = OB;
+
+
+	MomRull[10].mu = fuzzyAnd(muEr[OB], muDEr[PM]);
+	MomRull[10].term = OC;
+	MomRull[11].mu = fuzzyAnd(muEr[OC], muDEr[H]);
+	MomRull[11].term = OC;
+	MomRull[12].mu = fuzzyAnd(muEr[OM], muDEr[OM]);
+	MomRull[12].term = OC;
+	MomRull[13].mu = fuzzyAnd(muEr[H], muDEr[OC]);
+	MomRull[13].term = OC;
+	MomRull[14].mu = fuzzyAnd(muEr[PM], muDEr[OB]);
+	MomRull[14].term = OC;
+
+
+	MomRull[15].mu = fuzzyAnd(muEr[OB], muDEr[PC]);
+	MomRull[15].term = OM;
+	MomRull[16].mu = fuzzyAnd(muEr[OC], muDEr[PM]);
+	MomRull[16].term = OM;
+	MomRull[17].mu = fuzzyAnd(muEr[OM], muDEr[H]);
+	MomRull[17].term = OM;
+	MomRull[18].mu = fuzzyAnd(muEr[H], muDEr[OM]);
+	MomRull[18].term = OM;
+	MomRull[19].mu = fuzzyAnd(muEr[PM], muDEr[OC]);
+	MomRull[19].term = OM;
+	MomRull[20].mu = fuzzyAnd(muEr[PC], muDEr[OB]);
+	MomRull[20].term = OM;
+
+
+	MomRull[21].mu = fuzzyAnd(muEr[OB], muDEr[PB]);
+	MomRull[21].term = H;
+	MomRull[22].mu = fuzzyAnd(muEr[OC], muDEr[PC]);
+	MomRull[22].term = H;
+	MomRull[23].mu = fuzzyAnd(muEr[OM], muDEr[PM]);
+	MomRull[23].term = H;
+	MomRull[24].mu = fuzzyAnd(muEr[H], muDEr[H]);
+	MomRull[24].term = H;
+	MomRull[25].mu = fuzzyAnd(muEr[PM], muDEr[OM]);
+	MomRull[25].term = H;
+	MomRull[26].mu = fuzzyAnd(muEr[PC], muDEr[OC]);
+	MomRull[26].term = H;
+	MomRull[27].mu = fuzzyAnd(muEr[PB], muDEr[OB]);
+	MomRull[27].term = H;
+
+
+	MomRull[28].mu = fuzzyAnd(muEr[PB], muDEr[OC]);
+	MomRull[28].term = PM;
+	MomRull[29].mu = fuzzyAnd(muEr[PC], muDEr[OM]);
+	MomRull[29].term = PM;
+	MomRull[30].mu = fuzzyAnd(muEr[PM], muDEr[H]);
+	MomRull[30].term = PM;
+	MomRull[31].mu = fuzzyAnd(muEr[H], muDEr[PM]);
+	MomRull[31].term = PM;
+	MomRull[32].mu = fuzzyAnd(muEr[OM], muDEr[PC]);
+	MomRull[32].term = PM;
+	MomRull[33].mu = fuzzyAnd(muEr[OC], muDEr[PB]);
+	MomRull[33].term = PM;
+
+
+	MomRull[34].mu = fuzzyAnd(muEr[PB], muDEr[OM]);
+	MomRull[34].term = PC;
+	MomRull[35].mu = fuzzyAnd(muEr[PC], muDEr[H]);
+	MomRull[35].term = PC;
+	MomRull[36].mu = fuzzyAnd(muEr[PM], muDEr[PM]);
+	MomRull[36].term = PC;
+	MomRull[37].mu = fuzzyAnd(muEr[H], muDEr[PC]);
+	MomRull[37].term = PC;
+	MomRull[38].mu = fuzzyAnd(muEr[OM], muDEr[PB]);
+	MomRull[38].term = PC;
+
+
+	MomRull[39].mu = fuzzyAnd(muEr[PB], muDEr[PB]);
+	MomRull[39].term = PB;
+	MomRull[40].mu = fuzzyAnd(muEr[PB], muDEr[PC]);
+	MomRull[40].term = PB;
+	MomRull[41].mu = fuzzyAnd(muEr[PB], muDEr[PM]);
+	MomRull[41].term = PB;
+	MomRull[42].mu = fuzzyAnd(muEr[PB], muDEr[H]);
+	MomRull[42].term = PB;
+	MomRull[43].mu = fuzzyAnd(muEr[PC], muDEr[PB]);
+	MomRull[43].term = PB;
+	MomRull[44].mu = fuzzyAnd(muEr[PC], muDEr[PC]);
+	MomRull[44].term = PB;
+	MomRull[45].mu = fuzzyAnd(muEr[PC], muDEr[PM]);
+	MomRull[45].term = PB;
+	MomRull[46].mu = fuzzyAnd(muEr[PM], muDEr[PB]);
+	MomRull[46].term = PB;
+	MomRull[47].mu = fuzzyAnd(muEr[PM], muDEr[PC]);
+	MomRull[47].term = PB;
+	MomRull[48].mu = fuzzyAnd(muEr[H], muDEr[PB]);
+	MomRull[48].term = PB;
+	/*??????????+?????????????*/
+	TargetMoment = Mamdany_Singlton(MomRull, moment_var, MOMENT_RULLS_COUNT);
+
+	return TargetMoment;
+}

@@ -8,9 +8,9 @@
 #define SPEED_D 100
 #define APPLICATION_SPEED 1500
 
-#define STEP_MAX 1500
+#define STEP_MAX 2000
 #define STEP_MIN 0
-#define STEP_T 8000 
+#define STEP_T 10000 
 
 extern float speed;
 uint8_t motorState=0;
@@ -55,6 +55,7 @@ void measureTask(void* pvParameters)
 		taskENTER_CRITICAL(); 
 		{
 			getSpeed(USART1,&data.measureSpeed);
+			//data.measureSpeed=(int32_t)speed;
 			//error[1]=getTorque(USART1,&data.measureTorque);
 			//error[2]=getRegulatorTorqueRef(USART1,&data.regulatorReferenceTorque);
 			//data.regulatorReferenceTorque=data.measureTorque;

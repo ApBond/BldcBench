@@ -67,11 +67,11 @@
 #define REGULATION_EXECUTION_RATE     1    /*!< FOC execution rate in 
                                                            number of PWM cycles */     
 /* Gains values for torque and flux control loops */
-#define PID_TORQUE_KP_DEFAULT         700//3081//
-#define PID_TORQUE_KI_DEFAULT         500//2054//
+#define PID_TORQUE_KP_DEFAULT         100//3081//
+#define PID_TORQUE_KI_DEFAULT         40//2054//
 #define PID_TORQUE_KD_DEFAULT         50//
-#define PID_FLUX_KP_DEFAULT           700//3081//
-#define PID_FLUX_KI_DEFAULT           500//2054//
+#define PID_FLUX_KP_DEFAULT           100//3081//
+#define PID_FLUX_KI_DEFAULT           40//2054//
 #define PID_FLUX_KD_DEFAULT           50
 
 /* Torque/Flux control loop gains dividers*/
@@ -87,8 +87,8 @@
 #define SPEED_LOOP_FREQUENCY_HZ       1000 /*!<Execution rate of speed   
                                                       regulation loop (Hz) */
                                         
-#define PID_SPEED_KP_DEFAULT          300//1000/(SPEED_UNIT/10)// /* Workbench compute the gain for 01Hz unit*/
-#define PID_SPEED_KI_DEFAULT          70//700/(SPEED_UNIT/10)// /* Workbench compute the gain for 01Hz unit*/
+#define PID_SPEED_KP_DEFAULT          100//1000/(SPEED_UNIT/10)// /* Workbench compute the gain for 01Hz unit*/
+#define PID_SPEED_KI_DEFAULT          10//700/(SPEED_UNIT/10)// /* Workbench compute the gain for 01Hz unit*/
 #define PID_SPEED_KD_DEFAULT          50//0/(SPEED_UNIT/10)// /* Workbench compute the gain for 01Hz unit*/
 /* Speed PID parameter dividers */
 #define SP_KPDIV                      16
